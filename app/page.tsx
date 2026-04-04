@@ -83,10 +83,10 @@ function HeroSection() {
         <Image
           src="/logo.png"
           alt="Streamline Workshop"
-          width={180}
-          height={48}
+          width={360}
+          height={96}
           className="object-contain"
-          style={{ maxHeight: "48px", width: "auto" }}
+          style={{ maxHeight: "96px", width: "auto" }}
         />
         <a
           href="#chat"
@@ -666,8 +666,8 @@ function Footer() {
           <Image
             src="/logo.png"
             alt="Streamline Workshop"
-            width={220}
-            height={60}
+            width={440}
+            height={120}
             className="object-contain"
             style={{ maxHeight: "60px", width: "auto" }}
           />
