@@ -80,15 +80,14 @@ function HeroSection() {
           transition: "opacity 0.6s ease 0.1s",
         }}
       >
-        <span
-          className="text-2xl font-bold tracking-tight"
-          style={{
-            fontFamily: "var(--font-playfair), serif",
-            color: "#D4A574",
-          }}
-        >
-          Streamline Workshop
-        </span>
+        <Image
+          src="/logo.png"
+          alt="Streamline Workshop"
+          width={180}
+          height={48}
+          className="object-contain"
+          style={{ maxHeight: "48px", width: "auto" }}
+        />
         <a
           href="#chat"
           className="text-sm font-medium px-5 py-2 rounded-sm border transition-all duration-200"
@@ -663,15 +662,15 @@ function Footer() {
       style={{ background: "#1a1a1a" }}
     >
       <div className="max-w-lg mx-auto">
-        <div
-          className="font-bold mb-4"
-          style={{
-            fontFamily: "var(--font-playfair), serif",
-            color: "#D4A574",
-            fontSize: "clamp(28px, 3vw, 42px)",
-          }}
-        >
-          Streamline Workshop
+        <div className="flex justify-center mb-6">
+          <Image
+            src="/logo.png"
+            alt="Streamline Workshop"
+            width={220}
+            height={60}
+            className="object-contain"
+            style={{ maxHeight: "60px", width: "auto" }}
+          />
         </div>
         <p
           className="mb-6"
