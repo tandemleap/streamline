@@ -1,0 +1,730 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useRef, useState, useCallback } from "react";
+
+// ─── Types ──────────────────────────────────────────────────────────────────
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+// ─── Scroll-fade hook ───────────────────────────────────────────────────────
+
+function useFadeUp() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("visible");
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return ref;
+}
+
+// ─── Eyebrow ────────────────────────────────────────────────────────────────
+
+function Eyebrow({
+  children,
+  light = false,
+}: {
+  children: React.ReactNode;
+  light?: boolean;
+}) {
+  return (
+    <p
+      className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-4"
+      style={{
+        fontFamily: "var(--font-dm-sans), sans-serif",
+        color: light ? "#D4A574" : "#888",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+// ─── Hero Section ───────────────────────────────────────────────────────────
+
+function HeroSection() {
+  const [wordsVisible, setWordsVisible] = useState(false);
+  const lines = ["SOMETHING'S", "SLOWING YOUR", "BUSINESS DOWN."];
+
+  useEffect(() => {
+    const t = setTimeout(() => setWordsVisible(true), 300);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <section
+      className="min-h-screen flex flex-col"
+      style={{ background: "#1a1a1a" }}
+    >
+      {/* Nav */}
+      <nav
+        className="flex items-center justify-between px-8 md:px-16 py-6"
+        style={{
+          opacity: wordsVisible ? 1 : 0,
+          transition: "opacity 0.6s ease 0.1s",
+        }}
+      >
+        <span
+          className="text-2xl font-bold tracking-tight"
+          style={{
+            fontFamily: "var(--font-playfair), serif",
+            color: "#D4A574",
+          }}
+        >
+          Streamline Workshop
+        </span>
+        <a
+          href="#chat"
+          className="text-sm font-medium px-5 py-2 rounded-sm border transition-all duration-200"
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#D4A574",
+            borderColor: "#D4A574",
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = "#D4A574";
+            el.style.color = "#1a1a1a";
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = "transparent";
+            el.style.color = "#D4A574";
+          }}
+        >
+          Get Started
+        </a>
+      </nav>
+
+      {/* Content */}
+      <div className="flex-1 flex items-center px-8 md:px-16 py-12 md:py-0">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center max-w-7xl mx-auto">
+          {/* Left */}
+          <div>
+            <div
+              style={{
+                opacity: wordsVisible ? 1 : 0,
+                transform: wordsVisible ? "translateY(0)" : "translateY(10px)",
+                transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
+              }}
+            >
+              <Eyebrow light>A FOSTER DAD &amp; DAUGHTER TEAM</Eyebrow>
+            </div>
+
+            <h1
+              className="font-black leading-[1.0] mb-6"
+              style={{
+                fontFamily: "var(--font-playfair), serif",
+                color: "#ffffff",
+                fontSize: "clamp(40px, 5.5vw, 80px)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {lines.map((line, i) => (
+                <span key={i} className="block overflow-hidden">
+                  <span
+                    className="hero-word block"
+                    style={{
+                      animationDelay: wordsVisible ? `${i * 0.15}s` : "9999s",
+                      animationPlayState: wordsVisible ? "running" : "paused",
+                    }}
+                  >
+                    {line}
+                  </span>
+                </span>
+              ))}
+            </h1>
+
+            <p
+              className="font-medium"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#D4A574",
+                fontSize: "22px",
+                opacity: wordsVisible ? 1 : 0,
+                transform: wordsVisible ? "translateY(0)" : "translateY(12px)",
+                transition: "opacity 0.6s ease 0.65s, transform 0.6s ease 0.65s",
+              }}
+            >
+              Let&apos;s fix it.
+            </p>
+          </div>
+
+          {/* Right — team photo */}
+          <div
+            style={{
+              opacity: wordsVisible ? 1 : 0,
+              transform: wordsVisible ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s",
+            }}
+          >
+            <div
+              className="relative overflow-hidden ml-auto"
+              style={{
+                maxWidth: "520px",
+                aspectRatio: "520/640",
+              }}
+            >
+              {/* Amber overlay */}
+              <div
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{ background: "rgba(212,165,116,0.15)" }}
+              />
+              <Image
+                src="/team-photo.jpg"
+                alt="Scott and Corazon"
+                fill
+                className="object-cover object-top"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.src =
+                    "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
+                }}
+                priority
+              />
+            </div>
+            <p
+              className="mt-3 italic text-center"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#999",
+                fontSize: "13px",
+              }}
+            >
+              Scott and Corazon. A foster dad and daughter building something
+              that matters.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="flex justify-center pb-8 scroll-indicator-wrap">
+        <div className="scroll-indicator">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            style={{ color: "#D4A574" }}
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Who We Are Section ─────────────────────────────────────────────────────
+
+function WhoWeAreSection() {
+  const ref = useFadeUp();
+
+  return (
+    <section
+      className="py-24 md:py-36 px-8 md:px-16"
+      style={{ background: "#f5f1ed" }}
+    >
+      <div ref={ref} className="fade-up max-w-[680px] mx-auto">
+        <Eyebrow>WHO WE ARE</Eyebrow>
+
+        <h2
+          className="font-bold mb-10 leading-tight"
+          style={{
+            fontFamily: "var(--font-playfair), serif",
+            color: "#1a1a1a",
+            fontSize: "clamp(32px, 4vw, 52px)",
+          }}
+        >
+          We&apos;re not a software company.
+        </h2>
+
+        <div
+          className="space-y-6"
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#2a2a2a",
+            fontSize: "17px",
+            lineHeight: "1.75",
+          }}
+        >
+          <p>
+            Running a small business means wearing every hat. You&apos;re the
+            owner, the scheduler, the bookkeeper, and the closer — all before
+            lunch. Somewhere in there you&apos;ve heard that AI is changing
+            everything. Maybe it is. But you don&apos;t have time to figure out
+            what that means for your business.
+          </p>
+          <p
+            className="font-semibold"
+            style={{
+              color: "#1a1a1a",
+              fontFamily: "var(--font-playfair), serif",
+              fontStyle: "italic",
+              fontSize: "clamp(18px, 2vw, 22px)",
+            }}
+          >
+            That&apos;s where we come in.
+          </p>
+          <p>
+            Streamline Workshop is Scott and Corazon — a foster dad and daughter
+            who find what&apos;s slowing small businesses down and fix it. We
+            build custom solutions that fit the way you actually work. No
+            subscriptions. No software that forces you to change. Just something
+            that fits.
+          </p>
+          <p>
+            We&apos;re currently selecting a small number of businesses to work
+            with. Some will pay. Some will be on the house while we build our
+            portfolio. Either way you get something built for you.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Chatbot Section ────────────────────────────────────────────────────────
+
+function ChatbotSection() {
+  const headlineRef = useFadeUp();
+  const chatRef = useFadeUp();
+
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
+
+  const sendMessage = useCallback(async (userMessages: Message[]) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: userMessages }),
+      });
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      const text: string = data.text || "";
+
+      const COMPLETE_MARKER = "CONVERSATION_COMPLETE";
+      const isConvComplete = text.includes(COMPLETE_MARKER);
+      const cleanText = text.replace(COMPLETE_MARKER, "").trim();
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: cleanText },
+      ]);
+
+      if (isConvComplete) {
+        setIsComplete(true);
+        const allMessages = [
+          ...userMessages,
+          { role: "assistant" as const, content: cleanText },
+        ];
+        fetch("/api/send-summary", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: allMessages }),
+        }).catch(() => {});
+      }
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "Sorry, something went wrong. Please try again in a moment.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  // Initialize chatbot when section becomes visible
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || initialized) return;
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !initialized) {
+          setInitialized(true);
+          sendMessage([]);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [initialized, sendMessage]);
+
+  const handleSend = () => {
+    if (!input.trim() || isLoading || isComplete) return;
+    const userMsg: Message = { role: "user", content: input.trim() };
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
+    setInput("");
+    sendMessage(updatedMessages);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  return (
+    <section
+      id="chat"
+      ref={sectionRef}
+      className="py-24 md:py-36 px-8 md:px-16"
+      style={{ background: "#1a1a1a" }}
+    >
+      <div className="max-w-2xl mx-auto">
+        {/* Headline */}
+        <div ref={headlineRef} className="fade-up mb-12">
+          <Eyebrow light>GET STARTED</Eyebrow>
+          <h2
+            className="font-black leading-none"
+            style={{
+              fontFamily: "var(--font-playfair), serif",
+              color: "#ffffff",
+              fontSize: "clamp(36px, 5vw, 64px)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            TELL US WHERE
+            <br />
+            IT HURTS.
+          </h2>
+        </div>
+
+        {/* Chat window */}
+        <div ref={chatRef} className="fade-up stagger-2">
+          <div
+            className="rounded-sm overflow-hidden"
+            style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
+          >
+            {/* Message area */}
+            <div
+              className="chat-scroll overflow-y-auto p-5 space-y-4"
+              style={{ minHeight: "320px", maxHeight: "480px" }}
+            >
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className="max-w-[82%] px-4 py-3 rounded-sm"
+                    style={{
+                      fontFamily: "var(--font-dm-sans), sans-serif",
+                      background: msg.role === "user" ? "#D4A574" : "#2a2a2a",
+                      color: msg.role === "user" ? "#1a1a1a" : "#f0f0f0",
+                      fontSize: "15px",
+                      lineHeight: "1.65",
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+
+              {/* Typing indicator */}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div
+                    className="px-4 py-3 rounded-sm flex gap-1 items-center"
+                    style={{ background: "#2a2a2a" }}
+                  >
+                    <span
+                      className="typing-dot w-1.5 h-1.5 rounded-full"
+                      style={{ background: "#D4A574" }}
+                    />
+                    <span
+                      className="typing-dot w-1.5 h-1.5 rounded-full"
+                      style={{ background: "#D4A574" }}
+                    />
+                    <span
+                      className="typing-dot w-1.5 h-1.5 rounded-full"
+                      style={{ background: "#D4A574" }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div ref={chatBottomRef} />
+            </div>
+
+            {/* Input area */}
+            {!isComplete && (
+              <div
+                className="flex border-t"
+                style={{ background: "#222", borderColor: "#2a2a2a" }}
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder={
+                    initialized ? "Type your message..." : "One moment..."
+                  }
+                  disabled={isLoading || !initialized}
+                  className="flex-1 bg-transparent px-4 py-4 outline-none disabled:opacity-40"
+                  style={{
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    color: "#f0f0f0",
+                    fontSize: "15px",
+                  }}
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={isLoading || !input.trim() || !initialized}
+                  className="px-6 py-4 font-medium text-sm transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    background: "#D4A574",
+                    color: "#1a1a1a",
+                    fontSize: "14px",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!(e.currentTarget as HTMLButtonElement).disabled)
+                      (e.currentTarget as HTMLButtonElement).style.background =
+                        "#c49060";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background =
+                      "#D4A574";
+                  }}
+                >
+                  Send
+                </button>
+              </div>
+            )}
+
+            {isComplete && (
+              <div
+                className="px-5 py-4 border-t text-center"
+                style={{
+                  background: "#222",
+                  borderColor: "#2a2a2a",
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#D4A574",
+                  fontSize: "14px",
+                }}
+              >
+                Conversation complete. Scott will be in touch soon.
+              </div>
+            )}
+          </div>
+
+          <p
+            className="mt-4 text-center"
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              color: "#555",
+              fontSize: "13px",
+            }}
+          >
+            Scott will review your conversation and reach out within 48 hours.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── What Happens Next Section ──────────────────────────────────────────────
+
+function WhatHappensNextSection() {
+  const wrapRef = useFadeUp();
+
+  const steps = [
+    {
+      number: "01",
+      headline: "You talk.",
+      body: "Tell us what's slowing you down in a short conversation.",
+    },
+    {
+      number: "02",
+      headline: "We assess.",
+      body: "We'll figure out quickly whether this is something we can fix.",
+    },
+    {
+      number: "03",
+      headline: "We build.",
+      body: "You get something custom that actually fits your business.",
+    },
+  ];
+
+  return (
+    <section
+      className="py-24 md:py-36 px-8 md:px-16"
+      style={{ background: "#f5f1ed" }}
+    >
+      <div ref={wrapRef} className="fade-up max-w-5xl mx-auto">
+        <Eyebrow>WHAT HAPPENS NEXT</Eyebrow>
+
+        <h2
+          className="font-bold mb-16 leading-tight"
+          style={{
+            fontFamily: "var(--font-playfair), serif",
+            color: "#1a1a1a",
+            fontSize: "clamp(32px, 4vw, 52px)",
+          }}
+        >
+          Simple as it gets.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
+          {steps.map((step) => (
+            <div key={step.number}>
+              <div
+                className="font-black leading-none mb-5"
+                style={{
+                  fontFamily: "var(--font-playfair), serif",
+                  color: "#D4A574",
+                  fontSize: "clamp(52px, 6vw, 80px)",
+                }}
+              >
+                {step.number}
+              </div>
+              <h3
+                className="font-bold mb-2"
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#1a1a1a",
+                  fontSize: "20px",
+                }}
+              >
+                {step.headline}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#555",
+                  fontSize: "17px",
+                  lineHeight: "1.65",
+                }}
+              >
+                {step.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Footer ─────────────────────────────────────────────────────────────────
+
+function Footer() {
+  return (
+    <footer
+      className="py-20 px-8 md:px-16 text-center"
+      style={{ background: "#1a1a1a" }}
+    >
+      <div className="max-w-lg mx-auto">
+        <div
+          className="font-bold mb-4"
+          style={{
+            fontFamily: "var(--font-playfair), serif",
+            color: "#D4A574",
+            fontSize: "clamp(28px, 3vw, 42px)",
+          }}
+        >
+          Streamline Workshop
+        </div>
+        <p
+          className="mb-6"
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#ffffff",
+            fontSize: "18px",
+          }}
+        >
+          We find the friction. We fix it.
+        </p>
+        <a
+          href="mailto:hello@streamlineworkshop.com"
+          className="block mb-8 transition-colors duration-200"
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#999",
+            fontSize: "14px",
+            textDecoration: "none",
+          }}
+          onMouseEnter={(e) =>
+            ((e.currentTarget as HTMLAnchorElement).style.color = "#D4A574")
+          }
+          onMouseLeave={(e) =>
+            ((e.currentTarget as HTMLAnchorElement).style.color = "#999")
+          }
+        >
+          hello@streamlineworkshop.com
+        </a>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#444",
+            fontSize: "12px",
+          }}
+        >
+          &copy; 2025 Streamline Workshop
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+// ─── Page ────────────────────────────────────────────────────────────────────
+
+export default function Home() {
+  return (
+    <main>
+      <HeroSection />
+      <WhoWeAreSection />
+      <ChatbotSection />
+      <WhatHappensNextSection />
+      <Footer />
+    </main>
+  );
+}
