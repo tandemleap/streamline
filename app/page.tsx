@@ -165,7 +165,7 @@ function HeroSection() {
             </p>
           </div>
 
-          {/* Right — team photo */}
+          {/* Right — slowdown image */}
           <div
             style={{
               opacity: wordsVisible ? 1 : 0,
@@ -186,29 +186,13 @@ function HeroSection() {
                 style={{ background: "rgba(212,165,116,0.15)" }}
               />
               <Image
-                src="/team-photo.jpg"
-                alt="Scott and Corazon"
+                src="/slowdown.png"
+                alt="Something's slowing your business down"
                 fill
-                className="object-cover object-top"
-                onError={(e) => {
-                  const img = e.currentTarget as HTMLImageElement;
-                  img.src =
-                    "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
-                }}
+                className="object-cover object-center"
                 priority
               />
             </div>
-            <p
-              className="mt-3 italic text-center"
-              style={{
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                color: "#999",
-                fontSize: "13px",
-              }}
-            >
-              Scott and Corazon. A foster dad and daughter building something
-              that matters.
-            </p>
           </div>
         </div>
       </div>
@@ -247,59 +231,98 @@ function WhoWeAreSection() {
       className="py-24 md:py-36 px-8 md:px-16"
       style={{ background: "#f5f1ed" }}
     >
-      <div ref={ref} className="fade-up max-w-[680px] mx-auto">
-        <Eyebrow>WHO WE ARE</Eyebrow>
+      <div ref={ref} className="fade-up max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+          {/* Left — copy */}
+          <div>
+            <Eyebrow>WHO WE ARE</Eyebrow>
 
-        <h2
-          className="font-bold mb-10 leading-tight"
-          style={{
-            fontFamily: "var(--font-playfair), serif",
-            color: "#1a1a1a",
-            fontSize: "clamp(32px, 4vw, 52px)",
-          }}
-        >
-          We&apos;re not a software company.
-        </h2>
+            <h2
+              className="font-bold mb-10 leading-tight"
+              style={{
+                fontFamily: "var(--font-playfair), serif",
+                color: "#1a1a1a",
+                fontSize: "clamp(32px, 4vw, 52px)",
+              }}
+            >
+              We&apos;re not a software company.
+            </h2>
 
-        <div
-          className="space-y-6"
-          style={{
-            fontFamily: "var(--font-dm-sans), sans-serif",
-            color: "#2a2a2a",
-            fontSize: "17px",
-            lineHeight: "1.75",
-          }}
-        >
-          <p>
-            Running a small business means wearing every hat. You&apos;re the
-            owner, the scheduler, the bookkeeper, and the closer — all before
-            lunch. Somewhere in there you&apos;ve heard that AI is changing
-            everything. Maybe it is. But you don&apos;t have time to figure out
-            what that means for your business.
-          </p>
-          <p
-            className="font-semibold"
-            style={{
-              color: "#1a1a1a",
-              fontFamily: "var(--font-playfair), serif",
-              fontStyle: "italic",
-              fontSize: "clamp(18px, 2vw, 22px)",
-            }}
-          >
-            That&apos;s where we come in.
-          </p>
-          <p>
-            Streamline Workshop is Scott and Corazon — a foster dad and daughter
-            who find what&apos;s slowing small businesses down and fix it. We
-            build custom solutions that fit the way you actually work. No
-            subscriptions. No software that forces you to change. Just something
-            that fits.
-          </p>
-          <p>
-            We&apos;re currently selecting a small number of businesses to work
-            with. Some will pay. Some will be on the house while we build our
-            portfolio. Either way you get something built for you.
-          </p>
+            <div
+              className="space-y-6"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#2a2a2a",
+                fontSize: "17px",
+                lineHeight: "1.75",
+              }}
+            >
+              <p>
+                Running a small business means wearing every hat. You&apos;re the
+                owner, the scheduler, the bookkeeper, and the closer — all before
+                lunch. Somewhere in there you&apos;ve heard that AI is changing
+                everything. Maybe it is. But you don&apos;t have time to figure out
+                what that means for your business.
+              </p>
+              <p
+                className="font-semibold"
+                style={{
+                  color: "#1a1a1a",
+                  fontFamily: "var(--font-playfair), serif",
+                  fontStyle: "italic",
+                  fontSize: "clamp(18px, 2vw, 22px)",
+                }}
+              >
+                That&apos;s where we come in.
+              </p>
+              <p>
+                Streamline Workshop is Scott and Corazon — a foster dad and daughter
+                who find what&apos;s slowing small businesses down and fix it. We
+                build custom solutions that fit the way you actually work. No
+                subscriptions. No software that forces you to change. Just something
+                that fits.
+              </p>
+              <p>
+                We&apos;re currently selecting a small number of businesses to work
+                with. Some will pay. Some will be on the house while we build our
+                portfolio. Either way you get something built for you.
+              </p>
+            </div>
+          </div>
+
+          {/* Right — team photo */}
+          <div>
+            <div
+              className="relative overflow-hidden"
+              style={{ aspectRatio: "4/5" }}
+            >
+              <div
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{ background: "rgba(212,165,116,0.1)" }}
+              />
+              <Image
+                src="/team-photo.jpg"
+                alt="Scott and Corazon"
+                fill
+                className="object-cover object-top"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.src =
+                    "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
+                }}
+              />
+            </div>
+            <p
+              className="mt-3 italic text-center"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#888",
+                fontSize: "13px",
+              }}
+            >
+              Scott and Corazon. A foster dad and daughter building something that matters.
+            </p>
+          </div>
         </div>
       </div>
     </section>
