@@ -424,6 +424,7 @@ function IntakeForm() {
     name: "",
     businessType: "",
     painPoints: "",
+    value: "",
     contact: "",
   });
   const [submitting, setSubmitting] = useState(false);
@@ -557,6 +558,22 @@ function IntakeForm() {
             placeholder="Don't filter — the unglamorous stuff is often exactly what we're best at."
             rows={4}
             style={{ ...inputStyle, resize: "vertical", lineHeight: "1.65" }}
+          />
+        </div>
+
+        {/* Value */}
+        <div>
+          <label style={labelStyle}>
+            If this problem was solved, what would that be worth? Time saved,
+            money recovered, sanity restored — whatever fits.
+          </label>
+          <input
+            type="text"
+            name="value"
+            value={fields.value}
+            onChange={handleChange}
+            placeholder="e.g. 5 hours a week, $500/month in mistakes, just a lot of stress..."
+            style={inputStyle}
           />
         </div>
 

@@ -4,10 +4,11 @@ import { Resend } from "resend";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, businessType, painPoints, contact } = body as {
+    const { name, businessType, painPoints, value, contact } = body as {
       name: string;
       businessType: string;
       painPoints: string;
+      value: string;
       contact: string;
     };
 
@@ -26,6 +27,10 @@ Contact:       ${contact || "Not provided"}
 WHAT'S SLOWING THEM DOWN
 -------------------------
 ${painPoints || "Not provided"}
+
+WHAT SOLVING IT WOULD BE WORTH
+--------------------------------
+${value || "Not provided"}
 `;
 
     const resend = new Resend(process.env.RESEND_API_KEY);
