@@ -168,7 +168,7 @@ ${formatTranscript(messages)}
 `;
 
     const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "scott@tandemleap.com",
       subject: `New Streamline Workshop Inquiry — ${timestamp}`,
@@ -176,6 +176,12 @@ ${formatTranscript(messages)}
       text: textBody,
     });
 
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    console.log("Email sent:", data?.id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Send summary error:", error);
