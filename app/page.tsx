@@ -734,7 +734,7 @@ function ChatbotSection() {
     <section
       id="chat"
       ref={sectionRef}
-      className="py-24 md:py-36 px-8 md:px-16"
+      className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
       style={{ background: "#1c1510" }}
     >
       <div className="max-w-2xl mx-auto">
@@ -920,7 +920,7 @@ function WhatHappensNextSection() {
 
   return (
     <section
-      className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
+      className="pt-12 md:pt-16 pb-12 md:pb-16 px-8 md:px-16"
       style={{ background: "#1a1a1a" }}
     >
       <div ref={wrapRef} className="fade-up max-w-5xl mx-auto">
