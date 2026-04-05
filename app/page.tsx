@@ -735,7 +735,7 @@ function ChatbotSection() {
       id="chat"
       ref={sectionRef}
       className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
-      style={{ background: "#1c1510" }}
+      style={{ background: "#785D42" }}
     >
       <div className="max-w-2xl mx-auto">
         {/* Headline */}
@@ -883,7 +883,7 @@ function ChatbotSection() {
             className="mt-4 text-center"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              color: "#555",
+              color: "#c9a87c",
               fontSize: "13px",
             }}
           >
