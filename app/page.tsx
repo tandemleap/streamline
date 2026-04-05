@@ -460,9 +460,15 @@ function ChatbotSection() {
               fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "clamp(36px, 5vw, 64px)",
               letterSpacing: "-0.03em",
+              minHeight: "calc(2.2 * clamp(36px, 5vw, 64px))",
+              display: "flex",
+              flexWrap: "wrap",
+              alignContent: "flex-start",
+              gap: "0 0.25em",
             }}
           >
-            <span style={{ color: "#ffffff" }}>Tell us </span><RotatingPhrase stopped={messages.some(m => m.role === "user")} />
+            <span style={{ color: "#ffffff" }}>Tell us</span>
+            <RotatingPhrase stopped={messages.some(m => m.role === "user")} />
           </h2>
         </div>
 
