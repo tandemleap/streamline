@@ -68,13 +68,24 @@ function HeroSection() {
   }, []);
 
   return (
-    <section
-      className="min-h-screen flex flex-col"
-      style={{ background: "#1a1a1a" }}
-    >
+    <section className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Full-width background image */}
+      <Image
+        src="/slowdown.png"
+        alt="Something's slowing your business down"
+        fill
+        className="object-cover object-center"
+        priority
+      />
+      {/* Dark overlay for readability */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{ background: "rgba(0,0,0,0.58)" }}
+      />
+
       {/* Nav */}
       <nav
-        className="flex items-center justify-between px-8 md:px-16 py-6"
+        className="relative z-20 flex items-center justify-between px-8 md:px-16 py-6"
         style={{
           opacity: wordsVisible ? 1 : 0,
           transition: "opacity 0.6s ease 0.1s",
@@ -111,94 +122,62 @@ function HeroSection() {
         </a>
       </nav>
 
-      {/* Content */}
-      <div className="flex-1 flex items-center px-8 md:px-16 py-12 md:py-0">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center max-w-7xl mx-auto">
-          {/* Left */}
-          <div>
-            <div
-              style={{
-                opacity: wordsVisible ? 1 : 0,
-                transform: wordsVisible ? "translateY(0)" : "translateY(10px)",
-                transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
-              }}
-            >
-              <Eyebrow light>A FOSTER DAD &amp; DAUGHTER TEAM</Eyebrow>
-            </div>
-
-            <h1
-              className="font-black leading-[1.0] mb-6"
-              style={{
-                fontFamily: "var(--font-playfair), serif",
-                color: "#ffffff",
-                fontSize: "clamp(40px, 5.5vw, 80px)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {lines.map((line, i) => (
-                <span key={i} className="block overflow-hidden">
-                  <span
-                    className="hero-word block"
-                    style={{
-                      animationDelay: wordsVisible ? `${i * 0.15}s` : "9999s",
-                      animationPlayState: wordsVisible ? "running" : "paused",
-                    }}
-                  >
-                    {line}
-                  </span>
-                </span>
-              ))}
-            </h1>
-
-            <p
-              className="font-medium"
-              style={{
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                color: "#D4A574",
-                fontSize: "22px",
-                opacity: wordsVisible ? 1 : 0,
-                transform: wordsVisible ? "translateY(0)" : "translateY(12px)",
-                transition: "opacity 0.6s ease 0.65s, transform 0.6s ease 0.65s",
-              }}
-            >
-              Let&apos;s fix it.
-            </p>
-          </div>
-
-          {/* Right — slowdown image */}
+      {/* Content — anchored to bottom-left */}
+      <div className="relative z-20 flex-1 flex items-end px-8 md:px-16 pb-20 md:pb-28">
+        <div style={{ maxWidth: "780px" }}>
           <div
             style={{
               opacity: wordsVisible ? 1 : 0,
-              transform: wordsVisible ? "translateY(0)" : "translateY(28px)",
-              transition: "opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s",
+              transform: wordsVisible ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
             }}
           >
-            <div
-              className="relative overflow-hidden ml-auto"
-              style={{
-                maxWidth: "520px",
-                aspectRatio: "520/640",
-              }}
-            >
-              {/* Amber overlay */}
-              <div
-                className="absolute inset-0 z-10 pointer-events-none"
-                style={{ background: "rgba(212,165,116,0.15)" }}
-              />
-              <Image
-                src="/slowdown.png"
-                alt="Something's slowing your business down"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-            </div>
+            <Eyebrow light>A FOSTER DAD &amp; DAUGHTER TEAM</Eyebrow>
           </div>
+
+          <h1
+            className="font-black leading-[0.95] mb-6"
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              color: "#ffffff",
+              fontSize: "clamp(48px, 7vw, 104px)",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            {lines.map((line, i) => (
+              <span key={i} className="block overflow-hidden">
+                <span
+                  className="hero-word block"
+                  style={{
+                    animationDelay: wordsVisible ? `${i * 0.15}s` : "9999s",
+                    animationPlayState: wordsVisible ? "running" : "paused",
+                  }}
+                >
+                  {line}
+                </span>
+              </span>
+            ))}
+          </h1>
+
+          <p
+            className="font-semibold"
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              color: "#D4A574",
+              fontSize: "clamp(18px, 2vw, 24px)",
+              letterSpacing: "0.01em",
+              opacity: wordsVisible ? 1 : 0,
+              transform: wordsVisible ? "translateY(0)" : "translateY(12px)",
+              transition: "opacity 0.6s ease 0.65s, transform 0.6s ease 0.65s",
+            }}
+          >
+            Let&apos;s fix it.
+          </p>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="flex justify-center pb-8 scroll-indicator-wrap">
+      <div className="relative z-20 flex justify-center pb-8 scroll-indicator-wrap">
         <div className="scroll-indicator">
           <svg
             width="24"
@@ -240,9 +219,10 @@ function WhoWeAreSection() {
             <h2
               className="font-bold mb-10 leading-tight"
               style={{
-                fontFamily: "var(--font-playfair), serif",
+                fontFamily: "var(--font-dm-sans), sans-serif",
                 color: "#1a1a1a",
                 fontSize: "clamp(32px, 4vw, 52px)",
+                letterSpacing: "-0.02em",
               }}
             >
               We&apos;re not a software company.
@@ -268,7 +248,7 @@ function WhoWeAreSection() {
                 className="font-semibold"
                 style={{
                   color: "#1a1a1a",
-                  fontFamily: "var(--font-playfair), serif",
+                  fontFamily: "var(--font-dm-sans), sans-serif",
                   fontStyle: "italic",
                   fontSize: "clamp(18px, 2vw, 22px)",
                 }}
@@ -444,10 +424,10 @@ function ChatbotSection() {
           <h2
             className="font-black leading-none"
             style={{
-              fontFamily: "var(--font-playfair), serif",
+              fontFamily: "var(--font-dm-sans), sans-serif",
               color: "#ffffff",
               fontSize: "clamp(36px, 5vw, 64px)",
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.03em",
             }}
           >
             TELL US WHERE
@@ -627,9 +607,10 @@ function WhatHappensNextSection() {
         <h2
           className="font-bold mb-16 leading-tight"
           style={{
-            fontFamily: "var(--font-playfair), serif",
+            fontFamily: "var(--font-dm-sans), sans-serif",
             color: "#1a1a1a",
             fontSize: "clamp(32px, 4vw, 52px)",
+            letterSpacing: "-0.02em",
           }}
         >
           Simple as it gets.
@@ -641,7 +622,7 @@ function WhatHappensNextSection() {
               <div
                 className="font-black leading-none mb-5"
                 style={{
-                  fontFamily: "var(--font-playfair), serif",
+                  fontFamily: "var(--font-dm-sans), sans-serif",
                   color: "#D4A574",
                   fontSize: "clamp(52px, 6vw, 80px)",
                 }}
