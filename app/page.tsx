@@ -61,7 +61,7 @@ function Eyebrow({
 const HERO_PHRASES = [
   "still being done by hand.",
   "getting in the way of growth.",
-  "stopping you from doing what you're actually good at.",
+  "getting in the way of what you're really good at.",
   "making you feel like you're always behind.",
   "eating your time.",
   "driving you crazy.",
