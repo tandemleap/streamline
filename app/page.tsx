@@ -290,12 +290,13 @@ const PHRASES = [
   "what's driving you crazy.",
   "where the friction is.",
   "what's not working.",
-  "what you keep putting off fixing.",
+  "about a problem you haven't known how to solve.",
   "what's eating your time.",
   "what makes you want to throw your laptop.",
   "where you're stuck.",
   "what should take minutes but takes hours.",
   "what's broken.",
+  "what's the most annoying part of your week.",
 ];
 
 function RotatingPhrase() {
@@ -308,7 +309,7 @@ function RotatingPhrase() {
       setTimeout(() => {
         setIndex((i) => (i + 1) % PHRASES.length);
         setVisible(true);
-      }, 400);
+      }, 600);
     }, 2800);
     return () => clearInterval(cycle);
   }, []);
@@ -317,9 +318,9 @@ function RotatingPhrase() {
     <span
       style={{
         color: "#D4A574",
-        display: "inline-block",
+        display: "inline",
         opacity: visible ? 1 : 0,
-        transition: "opacity 0.4s ease",
+        transition: "opacity 0.6s ease",
       }}
     >
       {PHRASES[index]}
