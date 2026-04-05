@@ -299,11 +299,23 @@ const PHRASES = [
   "what's the most annoying part of your week.",
 ];
 
-function RotatingPhrase() {
+const STOPPED_PHRASE = "what's not working.";
+const STOPPED_INDEX = PHRASES.indexOf(STOPPED_PHRASE);
+
+function RotatingPhrase({ stopped }: { stopped: boolean }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    if (stopped) {
+      setVisible(false);
+      const t = setTimeout(() => {
+        setIndex(STOPPED_INDEX);
+        setVisible(true);
+      }, 600);
+      return () => clearTimeout(t);
+    }
+
     const cycle = setInterval(() => {
       setVisible(false);
       setTimeout(() => {
@@ -312,7 +324,7 @@ function RotatingPhrase() {
       }, 600);
     }, 2800);
     return () => clearInterval(cycle);
-  }, []);
+  }, [stopped]);
 
   return (
     <span
@@ -450,7 +462,7 @@ function ChatbotSection() {
               letterSpacing: "-0.03em",
             }}
           >
-            <span style={{ color: "#ffffff" }}>Tell us </span><RotatingPhrase />
+            <span style={{ color: "#ffffff" }}>Tell us </span><RotatingPhrase stopped={messages.some(m => m.role === "user")} />
           </h2>
         </div>
 
