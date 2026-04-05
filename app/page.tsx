@@ -286,7 +286,7 @@ function WhoWeAreSection() {
           >
             <p>
               Streamline Workshop is Scott and Corazon, a foster dad and daughter
-              from Washburn, Wisconsin. We listen to what&apos;s slowing your
+              We listen to what&apos;s slowing your
               business down — or just making you crazy — and build something that
               fixes it. Custom, not off the shelf. Built around how you actually
               work.
@@ -337,7 +337,7 @@ function WhoWeAreSection() {
                   fontSize: "12px",
                 }}
               >
-                Scott and Corazon. Washburn, Wisconsin.
+                Scott and Corazon.
               </p>
             </div>
             <Image
