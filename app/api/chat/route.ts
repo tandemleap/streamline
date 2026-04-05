@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { Resend } from "resend";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -149,22 +150,27 @@ export async function POST(request: NextRequest) {
     // Strip CONVERSATION_COMPLETE from the text before sending to frontend
     const cleanText = rawText.replace("CONVERSATION_COMPLETE", "").trim();
 
-    // If conversation is complete, trigger email summary
+    // If conversation is complete, send email summary directly
     if (conversationComplete) {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        await fetch(`${baseUrl}/api/send-summary`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: [
-              ...anthropicMessages,
-              { role: "assistant", content: cleanText },
-            ],
-          }),
+        const allMessages = [
+          ...anthropicMessages,
+          { role: "assistant", content: cleanText },
+        ];
+        const transcript = allMessages
+          .map((m) => `${m.role === "user" ? "Business Owner" : "Streamline Workshop"}:\n${m.content}`)
+          .join("\n\n---\n\n");
+
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const { error } = await resend.emails.send({
+          from: "Streamline Workshop <noreply@tandemleap.com>",
+          to: "scott@tandemleap.com",
+          subject: `New Streamline Workshop Inquiry — ${new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })}`,
+          text: `NEW STREAMLINE WORKSHOP INQUIRY\n\nFULL TRANSCRIPT\n---------------\n${transcript}`,
         });
+        if (error) console.error("Resend error:", error);
+        else console.log("Summary email sent");
       } catch (emailError) {
-        // Log but don't fail the response if email errors
         console.error("Email send error:", emailError);
       }
     }
