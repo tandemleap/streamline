@@ -735,7 +735,7 @@ function ChatbotSection() {
       id="chat"
       ref={sectionRef}
       className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
-      style={{ background: "#785D42" }}
+      style={{ background: "#4A3929" }}
     >
       <div className="max-w-2xl mx-auto">
         {/* Headline */}
