@@ -373,26 +373,13 @@ function ChatbotSection() {
       const data = await res.json();
       const text: string = data.text || "";
 
-      const COMPLETE_MARKER = "CONVERSATION_COMPLETE";
-      const isConvComplete = text.includes(COMPLETE_MARKER);
-      const cleanText = text.replace(COMPLETE_MARKER, "").trim();
-
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: cleanText },
+        { role: "assistant", content: text },
       ]);
 
-      if (isConvComplete) {
+      if (data.conversationComplete) {
         setIsComplete(true);
-        const allMessages = [
-          ...userMessages,
-          { role: "assistant" as const, content: cleanText },
-        ];
-        fetch("/api/send-summary", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: allMessages }),
-        }).catch(() => {});
       }
     } catch {
       setMessages((prev) => [
