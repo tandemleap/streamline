@@ -99,42 +99,11 @@ function HeroSection() {
           className="object-contain"
           style={{ maxHeight: "96px", width: "auto" }}
         />
-        <a
-          href="#chat"
-          className="text-sm font-medium px-5 py-2 rounded-sm border transition-all duration-200"
-          style={{
-            fontFamily: "var(--font-dm-sans), sans-serif",
-            color: "#D4A574",
-            borderColor: "#D4A574",
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = "#D4A574";
-            el.style.color = "#1a1a1a";
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = "transparent";
-            el.style.color = "#D4A574";
-          }}
-        >
-          Get Started
-        </a>
       </nav>
 
       {/* Content — anchored to bottom-left */}
       <div className="relative z-20 flex-1 flex items-end px-8 md:px-16 pb-20 md:pb-28">
         <div style={{ maxWidth: "780px" }}>
-          <div
-            style={{
-              opacity: wordsVisible ? 1 : 0,
-              transform: wordsVisible ? "translateY(0)" : "translateY(10px)",
-              transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
-            }}
-          >
-            <Eyebrow light>A FOSTER DAD &amp; DAUGHTER TEAM</Eyebrow>
-          </div>
-
           <h1
             className="font-black leading-[0.95] mb-6"
             style={{
