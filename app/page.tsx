@@ -339,7 +339,7 @@ function WhoWeAreSection() {
                   fontSize: "12px",
                 }}
               >
-                Scott and Corazon.
+                Scott and Corazon. Washburn, Wisconsin.
               </p>
             </div>
             <Image
@@ -417,6 +417,206 @@ function RotatingPhrase({ stopped }: { stopped: boolean }) {
   );
 }
 
+// ─── Intake Form ────────────────────────────────────────────────────────────
+
+function IntakeForm() {
+  const [fields, setFields] = useState({
+    name: "",
+    businessType: "",
+    painPoints: "",
+    contact: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async () => {
+    if (!fields.name.trim() || !fields.contact.trim()) {
+      setError("Please fill in your name and how Scott can reach you.");
+      return;
+    }
+    setSubmitting(true);
+    setError("");
+    try {
+      const res = await fetch("/api/intake-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    fontFamily: "var(--font-dm-sans), sans-serif",
+    background: "#1a1a1a",
+    color: "#f0f0f0",
+    border: "1px solid #2a2a2a",
+    borderRadius: "2px",
+    fontSize: "15px",
+    padding: "10px 14px",
+    width: "100%",
+    outline: "none",
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-dm-sans), sans-serif",
+    color: "#888",
+    fontSize: "12px",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    display: "block",
+    marginBottom: "6px",
+  };
+
+  if (submitted) {
+    return (
+      <div
+        className="rounded-sm p-8 text-center"
+        style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
+      >
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#D4A574",
+            fontSize: "18px",
+            fontWeight: 600,
+            marginBottom: "10px",
+          }}
+        >
+          Got it. Thanks for reaching out.
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            color: "#888",
+            fontSize: "14px",
+            lineHeight: "1.65",
+          }}
+        >
+          Scott will personally review what you shared and be in touch within 48
+          hours.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="rounded-sm overflow-hidden"
+      style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
+    >
+      <div className="p-6 space-y-5">
+        {/* Name */}
+        <div>
+          <label style={labelStyle}>Your name</label>
+          <input
+            type="text"
+            name="name"
+            value={fields.name}
+            onChange={handleChange}
+            placeholder="First name is fine"
+            style={inputStyle}
+          />
+        </div>
+
+        {/* Business type */}
+        <div>
+          <label style={labelStyle}>Type of business</label>
+          <input
+            type="text"
+            name="businessType"
+            value={fields.businessType}
+            onChange={handleChange}
+            placeholder="e.g. landscaping company, dental practice, online store..."
+            style={inputStyle}
+          />
+        </div>
+
+        {/* Pain points */}
+        <div>
+          <label style={labelStyle}>
+            Think about your typical week. What tasks feel repetitive,
+            frustrating, or harder than they should be?
+          </label>
+          <textarea
+            name="painPoints"
+            value={fields.painPoints}
+            onChange={handleChange}
+            placeholder="Don't filter — the unglamorous stuff is often exactly what we're best at."
+            rows={4}
+            style={{ ...inputStyle, resize: "vertical", lineHeight: "1.65" }}
+          />
+        </div>
+
+        {/* Contact */}
+        <div>
+          <label style={labelStyle}>Best way for Scott to reach you</label>
+          <input
+            type="text"
+            name="contact"
+            value={fields.contact}
+            onChange={handleChange}
+            placeholder="Phone, email, whatever works for you"
+            style={inputStyle}
+          />
+        </div>
+
+        {error && (
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              color: "#e07070",
+              fontSize: "13px",
+            }}
+          >
+            {error}
+          </p>
+        )}
+      </div>
+
+      {/* Submit */}
+      <div
+        className="px-6 pb-6"
+        style={{ borderTop: "1px solid #1a1a1a" }}
+      >
+        <button
+          onClick={handleSubmit}
+          disabled={submitting}
+          className="w-full py-3 font-semibold text-sm transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed rounded-sm"
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            background: "#D4A574",
+            color: "#1a1a1a",
+            fontSize: "14px",
+            marginTop: "16px",
+          }}
+          onMouseEnter={(e) => {
+            if (!(e.currentTarget as HTMLButtonElement).disabled)
+              (e.currentTarget as HTMLButtonElement).style.background = "#c49060";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "#D4A574";
+          }}
+        >
+          {submitting ? "Sending..." : "Send it to Scott"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Chatbot Section ────────────────────────────────────────────────────────
 
 function ChatbotSection() {
@@ -428,6 +628,7 @@ function ChatbotSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [initialized, setInitialized] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -493,6 +694,11 @@ function ChatbotSection() {
 
   const handleSend = () => {
     if (!input.trim() || isLoading || isComplete) return;
+    if (input.trim().toLowerCase() === "form") {
+      setShowForm(true);
+      setInput("");
+      return;
+    }
     const userMsg: Message = { role: "user", content: input.trim() };
     const updatedMessages = [...messages, userMsg];
     setMessages(updatedMessages);
@@ -531,8 +737,11 @@ function ChatbotSection() {
           </h2>
         </div>
 
-        {/* Chat window */}
+        {/* Chat window or intake form */}
         <div ref={chatRef} className="fade-up stagger-2">
+          {showForm ? (
+            <IntakeForm />
+          ) : (
           <div
             className="rounded-sm overflow-hidden"
             style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
@@ -651,6 +860,7 @@ function ChatbotSection() {
               </div>
             )}
           </div>
+          )}
 
           <p
             className="mt-4 text-center"
