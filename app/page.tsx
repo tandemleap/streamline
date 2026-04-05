@@ -234,7 +234,7 @@ function WhoWeAreSection() {
         <Eyebrow>WHO WE ARE</Eyebrow>
 
         <h2
-          className="font-bold mb-10 leading-tight"
+          className="font-bold mb-5 leading-tight"
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             color: "#1a1a1a",
@@ -245,8 +245,9 @@ function WhoWeAreSection() {
           We&apos;re not a software company.
         </h2>
 
-        <div
-          className="space-y-4"
+        {/* First paragraph — full width above the grid */}
+        <p
+          className="mb-6"
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             color: "#2a2a2a",
@@ -254,81 +255,93 @@ function WhoWeAreSection() {
             lineHeight: "1.65",
           }}
         >
-          <p>
-            Running a small business means wearing every hat — owner, scheduler,
-            bookkeeper, closer — all before lunch. You&apos;ve heard that AI is
-            changing everything. Maybe it is. But if you don&apos;t have time to
-            figure out what that means for your business, that&apos;s where we
-            come in.
-          </p>
+          Running a small business means wearing every hat — owner, scheduler,
+          bookkeeper, closer — all before lunch. You&apos;ve heard that AI is
+          changing everything. Maybe it is. But if you don&apos;t have time to
+          figure out what that means for your business, that&apos;s where we
+          come in.
+        </p>
 
-          {/* Team photo — floats right on md+, stacks below first para on mobile */}
+        {/* Grid: text left, image right — bottoms align via items-stretch */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_36%] gap-10 items-stretch">
           <div
-            className="md:float-right md:ml-10 mb-4 md:mb-2"
-            style={{ width: "clamp(220px, 36%, 360px)" }}
+            className="space-y-4"
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              color: "#2a2a2a",
+              fontSize: "16px",
+              lineHeight: "1.65",
+            }}
           >
-            <div
-              className="relative overflow-hidden"
-              style={{ aspectRatio: "4/5" }}
-            >
-              <div
-                className="absolute inset-0 z-10 pointer-events-none"
-                style={{ background: "rgba(212,165,116,0.1)" }}
-              />
-              <Image
-                src="/team-photo.jpg"
-                alt="Scott and Corazon"
-                fill
-                className="object-cover object-top"
-                onError={(e) => {
-                  const img = e.currentTarget as HTMLImageElement;
-                  img.src =
-                    "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
-                }}
-              />
-            </div>
-            <p
-              className="mt-3 italic text-center"
-              style={{
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                color: "#888",
-                fontSize: "13px",
-              }}
-            >
-              Scott and Corazon. Washburn, Wisconsin.
+            <p>
+              Streamline Workshop is Scott and Corazon, a foster dad and daughter
+              from Washburn, Wisconsin. We listen to what&apos;s slowing your
+              business down — or just making you crazy — and build something that
+              fixes it. Custom, not off the shelf. Built around how you actually
+              work.
+            </p>
+            <p>
+              What we&apos;re doing is genuinely new. Custom built solutions for
+              small businesses weren&apos;t really possible a year ago. The tools
+              have changed dramatically and we&apos;re learning by building real
+              things for real people — not running experiments in a vacuum. We
+              won&apos;t take on work we can&apos;t deliver. If your problem
+              isn&apos;t something we can solve, we&apos;ll tell you upfront and
+              won&apos;t waste your time.
+            </p>
+            <p>
+              We have zero overhead and no investors to answer to. That means we
+              can work with real small business budgets and still deliver genuine
+              value. We&apos;re also taking on a handful of clients for free while
+              we build our portfolio — so tell us your story.
+            </p>
+            <p>
+              Scott has always believed you learn by building — get in a little
+              over your head, figure it out, finish it. This business isn&apos;t
+              just helping Corazon become the first person in her family to go to
+              college, it&apos;s part of her education, helping her build skills
+              she&apos;ll need no matter what the future looks like.
             </p>
           </div>
-          <p>
-            Streamline Workshop is Scott and Corazon, a foster dad and daughter
-            from Washburn, Wisconsin. We listen to what&apos;s slowing your
-            business down — or just making you crazy — and build something that
-            fixes it. Custom, not off the shelf. Built around how you actually
-            work.
-          </p>
-          <p>
-            What we&apos;re doing is genuinely new. Custom built solutions for
-            small businesses weren&apos;t really possible a year ago. The tools
-            have changed dramatically and we&apos;re learning by building real
-            things for real people — not running experiments in a vacuum. We
-            won&apos;t take on work we can&apos;t deliver. If your problem
-            isn&apos;t something we can solve, we&apos;ll tell you upfront and
-            won&apos;t waste your time.
-          </p>
-          <p>
-            We have zero overhead and no investors to answer to. That means we
-            can work with real small business budgets and still deliver genuine
-            value. We&apos;re also taking on a handful of clients for free while
-            we build our portfolio — so tell us your story.
-          </p>
-          <p>
-            Scott has always believed you learn by building — get in a little
-            over your head, figure it out, finish it. This business isn&apos;t
-            just helping Corazon become the first person in her family to go to
-            college, it&apos;s part of her education, helping her build skills
-            she&apos;ll need no matter what the future looks like.
-          </p>
+
+          {/* Image fills the full height of the text column */}
+          <div className="relative overflow-hidden min-h-[280px]">
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: "rgba(212,165,116,0.1)", zIndex: 1 }}
+            />
+            {/* Caption overlay */}
+            <div
+              className="absolute bottom-0 left-0 right-0 pb-3 px-3 pt-8"
+              style={{
+                background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.55))",
+                zIndex: 2,
+              }}
+            >
+              <p
+                className="italic text-center"
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#ddd",
+                  fontSize: "12px",
+                }}
+              >
+                Scott and Corazon. Washburn, Wisconsin.
+              </p>
+            </div>
+            <Image
+              src="/team-photo.jpg"
+              alt="Scott and Corazon"
+              fill
+              className="object-cover object-top"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.src =
+                  "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
+              }}
+            />
+          </div>
         </div>
-        <div className="clear-both" />
       </div>
     </section>
   );
@@ -668,16 +681,16 @@ function WhatHappensNextSection() {
   return (
     <section
       className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
-      style={{ background: "#f5f1ed" }}
+      style={{ background: "#1a1a1a" }}
     >
       <div ref={wrapRef} className="fade-up max-w-5xl mx-auto">
-        <Eyebrow>WHAT HAPPENS NEXT</Eyebrow>
+        <Eyebrow light>WHAT HAPPENS NEXT</Eyebrow>
 
         <h2
           className="font-bold mb-16 leading-tight"
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
-            color: "#1a1a1a",
+            color: "#ffffff",
             fontSize: "clamp(32px, 4vw, 52px)",
             letterSpacing: "-0.02em",
           }}
@@ -702,7 +715,7 @@ function WhatHappensNextSection() {
                 className="font-bold mb-2"
                 style={{
                   fontFamily: "var(--font-dm-sans), sans-serif",
-                  color: "#1a1a1a",
+                  color: "#ffffff",
                   fontSize: "20px",
                 }}
               >
@@ -711,7 +724,7 @@ function WhatHappensNextSection() {
               <p
                 style={{
                   fontFamily: "var(--font-dm-sans), sans-serif",
-                  color: "#555",
+                  color: "#999",
                   fontSize: "17px",
                   lineHeight: "1.65",
                 }}
