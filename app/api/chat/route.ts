@@ -161,6 +161,23 @@ export async function POST(request: NextRequest) {
           ...anthropicMessages,
           { role: "assistant", content: cleanText },
         ];
+
+        // Generate a summary paragraph using Claude
+        const summaryResponse = await client.messages.create({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 300,
+          messages: [
+            {
+              role: "user",
+              content: `You are helping Scott Griffiths of Streamline Workshop review a new client inquiry. Read this intake conversation and write a single concise paragraph (4-6 sentences) summarizing: who the person is, what business they run, what problem they described, the rough cost/value of the problem if mentioned, and their contact info. Write it as a briefing for Scott — direct and useful, no fluff.\n\nConversation:\n${allMessages.map((m) => `${m.role === "user" ? "Client" : "Bot"}: ${m.content}`).join("\n\n")}`,
+            },
+          ],
+        });
+        const summary =
+          summaryResponse.content[0].type === "text"
+            ? summaryResponse.content[0].text
+            : "";
+
         const transcript = allMessages
           .map((m) => `${m.role === "user" ? "Business Owner" : "Streamline Workshop"}:\n${m.content}`)
           .join("\n\n---\n\n");
@@ -170,7 +187,7 @@ export async function POST(request: NextRequest) {
           from: "Streamline Workshop <noreply@tandemleap.com>",
           to: "scott@tandemleap.com",
           subject: `New Streamline Workshop Inquiry — ${new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })}`,
-          text: `NEW STREAMLINE WORKSHOP INQUIRY\n\nFULL TRANSCRIPT\n---------------\n${transcript}`,
+          text: `NEW STREAMLINE WORKSHOP INQUIRY\n\nSUMMARY\n-------\n${summary}\n\nFULL TRANSCRIPT\n---------------\n${transcript}`,
         });
         if (error) console.error("Resend error:", error);
         else console.log("Summary email sent");
