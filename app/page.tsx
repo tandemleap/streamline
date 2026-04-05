@@ -90,7 +90,7 @@ function HeroRotatingPhrase({ visible }: { visible: boolean }) {
     <span
       style={{
         color: "#D4A574",
-        fontSize: "0.72em",
+        fontSize: "clamp(22px, 3.2vw, 52px)",
         opacity: visible && phraseVisible ? 1 : 0,
         transition: phraseVisible ? "opacity 0.6s ease" : "opacity 0.6s ease",
       }}
@@ -146,7 +146,7 @@ function HeroSection() {
 
       {/* Content — anchored to bottom-left */}
       <div className="relative z-20 flex-1 flex items-end px-8 md:px-16 pb-20 md:pb-28">
-        <div style={{ maxWidth: "780px" }}>
+        <div style={{ maxWidth: "1000px" }}>
           <h1
             className="font-black mb-6"
             style={{
@@ -171,7 +171,7 @@ function HeroSection() {
             <span
               className="block"
               style={{
-                minHeight: "calc(2 * 0.72em * 1.1)",
+                minHeight: "clamp(26px, 3.8vw, 62px)",
                 opacity: wordsVisible ? 1 : 0,
                 transition: "opacity 0.5s ease 0.3s",
               }}
