@@ -515,7 +515,7 @@ function IntakeForm() {
 
   return (
     <div
-      className="rounded-sm overflow-hidden"
+      className="rounded-xl overflow-hidden"
       style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
     >
       <div className="p-6 space-y-5">
@@ -611,7 +611,7 @@ function IntakeForm() {
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className="w-full py-3 font-semibold text-sm transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed rounded-sm"
+          className="w-full py-3 font-semibold text-sm transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg"
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             background: "#D4A574",
@@ -760,7 +760,7 @@ function ChatbotSection() {
             <IntakeForm />
           ) : (
           <div
-            className="rounded-sm overflow-hidden"
+            className="rounded-xl overflow-hidden"
             style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
           >
             {/* Message area */}
