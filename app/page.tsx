@@ -151,9 +151,9 @@ function HeroSection() {
             className="font-black mb-6"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "clamp(48px, 7vw, 104px)",
+              fontSize: "clamp(41px, 5.95vw, 88px)",
               letterSpacing: "-0.03em",
-              lineHeight: "1.0",
+              lineHeight: "1.1",
             }}
           >
             <span className="block overflow-hidden" style={{ paddingBottom: "0.12em" }}>
@@ -165,13 +165,14 @@ function HeroSection() {
                   animationPlayState: wordsVisible ? "running" : "paused",
                 }}
               >
-                Something&apos;s
+                Something is
               </span>
             </span>
             <span
               className="block"
               style={{
                 minHeight: "clamp(26px, 3.8vw, 62px)",
+                marginTop: "-0.15em",
                 opacity: wordsVisible ? 1 : 0,
                 transition: "opacity 0.5s ease 0.3s",
               }}
