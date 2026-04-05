@@ -700,8 +700,8 @@ export default function Home() {
     <main>
       <HeroSection />
       <WhoWeAreSection />
-      <ChatbotSection />
       <WhatHappensNextSection />
+      <ChatbotSection />
       <Footer />
     </main>
   );
