@@ -155,7 +155,7 @@ function HeroSection() {
               lineHeight: "1.0",
             }}
           >
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden" style={{ paddingBottom: "0.12em" }}>
               <span
                 className="hero-word block"
                 style={{
