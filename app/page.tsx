@@ -323,8 +323,9 @@ function ChatbotSection() {
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when messages change
+  // Auto-scroll to bottom when messages change (not on initial empty state)
   useEffect(() => {
+    if (messages.length === 0) return;
     chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
