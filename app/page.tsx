@@ -56,11 +56,52 @@ function Eyebrow({
   );
 }
 
+// ─── Hero Rotating Phrase ───────────────────────────────────────────────────
+
+const HERO_PHRASES = [
+  "still being done by hand.",
+  "getting in the way of growth.",
+  "stopping you from doing what you're actually good at.",
+  "making you feel like you're always behind.",
+  "eating your time.",
+  "driving you crazy.",
+  "making you less efficient.",
+  "still running on clunky spreadsheets.",
+];
+
+function HeroRotatingPhrase({ visible }: { visible: boolean }) {
+  const [index, setIndex] = useState(0);
+  const [phraseVisible, setPhraseVisible] = useState(true);
+
+  useEffect(() => {
+    if (!visible) return;
+    const cycle = setInterval(() => {
+      setPhraseVisible(false);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % HERO_PHRASES.length);
+        setPhraseVisible(true);
+      }, 600);
+    }, 2800);
+    return () => clearInterval(cycle);
+  }, [visible]);
+
+  return (
+    <span
+      style={{
+        color: "#D4A574",
+        opacity: visible && phraseVisible ? 1 : 0,
+        transition: phraseVisible ? "opacity 0.6s ease" : "opacity 0.6s ease",
+      }}
+    >
+      {HERO_PHRASES[index]}
+    </span>
+  );
+}
+
 // ─── Hero Section ───────────────────────────────────────────────────────────
 
 function HeroSection() {
   const [wordsVisible, setWordsVisible] = useState(false);
-  const lines = ["SOMETHING'S", "SLOWING YOUR", "BUSINESS DOWN."];
 
   useEffect(() => {
     const t = setTimeout(() => setWordsVisible(true), 300);
@@ -105,27 +146,36 @@ function HeroSection() {
       <div className="relative z-20 flex-1 flex items-end px-8 md:px-16 pb-20 md:pb-28">
         <div style={{ maxWidth: "780px" }}>
           <h1
-            className="font-black leading-[0.95] mb-6"
+            className="font-black mb-6"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              color: "#ffffff",
               fontSize: "clamp(48px, 7vw, 104px)",
               letterSpacing: "-0.03em",
+              lineHeight: "1.0",
             }}
           >
-            {lines.map((line, i) => (
-              <span key={i} className="block overflow-hidden">
-                <span
-                  className="hero-word block"
-                  style={{
-                    animationDelay: wordsVisible ? `${i * 0.15}s` : "9999s",
-                    animationPlayState: wordsVisible ? "running" : "paused",
-                  }}
-                >
-                  {line}
-                </span>
+            <span className="block overflow-hidden">
+              <span
+                className="hero-word block"
+                style={{
+                  color: "#ffffff",
+                  animationDelay: wordsVisible ? "0s" : "9999s",
+                  animationPlayState: wordsVisible ? "running" : "paused",
+                }}
+              >
+                Something&apos;s
               </span>
-            ))}
+            </span>
+            <span
+              className="block"
+              style={{
+                minHeight: "2.1em",
+                opacity: wordsVisible ? 1 : 0,
+                transition: "opacity 0.5s ease 0.3s",
+              }}
+            >
+              <HeroRotatingPhrase visible={wordsVisible} />
+            </span>
           </h1>
 
           <p
