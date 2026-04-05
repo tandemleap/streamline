@@ -761,104 +761,211 @@ function ChatbotSection() {
           ) : (
           <div
             className="rounded-xl overflow-hidden"
-            style={{ background: "#0d0d0d", border: "1px solid #2a2a2a" }}
+            style={{
+              background: "#0d0d0d",
+              border: "1px solid #2a2a2a",
+              boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
+            }}
           >
+            {/* Header bar */}
+            <div
+              className="flex items-center gap-3 px-5 py-3 border-b"
+              style={{ background: "#111", borderColor: "#2a2a2a" }}
+            >
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ background: "#D4A574" }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    color: "#1a1a1a",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  SW
+                </span>
+              </div>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    color: "#f0f0f0",
+                    lineHeight: 1,
+                    marginBottom: "3px",
+                  }}
+                >
+                  Streamline Workshop
+                </p>
+                <div className="flex items-center gap-1.5">
+                  <span
+                    className="online-dot w-1.5 h-1.5 rounded-full inline-block"
+                    style={{ background: "#4ade80" }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "var(--font-dm-sans), sans-serif",
+                      fontSize: "11px",
+                      color: "#666",
+                    }}
+                  >
+                    Online
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Message area */}
             <div
               ref={chatScrollRef}
-              className="chat-scroll overflow-y-auto p-5 space-y-4"
+              className="chat-scroll overflow-y-auto px-5 py-5"
               style={{ minHeight: "320px", maxHeight: "480px" }}
             >
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                >
+              <div className="space-y-2">
+              {messages.map((msg, i) => {
+                const isUser = msg.role === "user";
+                const prevMsg = messages[i - 1];
+                const nextMsg = messages[i + 1];
+                const isFirstInGroup = !prevMsg || prevMsg.role !== msg.role;
+                const isLastInGroup = !nextMsg || nextMsg.role !== msg.role;
+
+                // iMessage-style asymmetric corners
+                const borderRadius = isUser
+                  ? isLastInGroup
+                    ? "18px 18px 4px 18px"
+                    : "18px 18px 18px 18px"
+                  : isLastInGroup
+                    ? "18px 18px 18px 4px"
+                    : "18px 18px 18px 18px";
+
+                return (
                   <div
-                    className="max-w-[82%] px-4 py-3 rounded-sm"
-                    style={{
-                      fontFamily: "var(--font-dm-sans), sans-serif",
-                      background: msg.role === "user" ? "#D4A574" : "#2a2a2a",
-                      color: msg.role === "user" ? "#1a1a1a" : "#f0f0f0",
-                      fontSize: "15px",
-                      lineHeight: "1.65",
-                      whiteSpace: "pre-wrap",
-                    }}
+                    key={i}
+                    className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
+                    style={{ marginTop: isFirstInGroup && i > 0 ? "12px" : undefined }}
                   >
-                    {msg.content}
+                    {/* Bot avatar — only on last bubble in group */}
+                    {!isUser && (
+                      <div
+                        className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                          background: isLastInGroup ? "#D4A574" : "transparent",
+                          marginBottom: "2px",
+                        }}
+                      >
+                        {isLastInGroup && (
+                          <span
+                            style={{
+                              fontFamily: "var(--font-dm-sans), sans-serif",
+                              fontSize: "8px",
+                              fontWeight: 700,
+                              color: "#1a1a1a",
+                            }}
+                          >
+                            SW
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    <div
+                      className="max-w-[78%] px-4 py-2.5"
+                      style={{
+                        fontFamily: "var(--font-dm-sans), sans-serif",
+                        background: isUser
+                          ? "linear-gradient(135deg, #D4A574 0%, #c08040 100%)"
+                          : "#1e1e1e",
+                        color: isUser ? "#1a1a1a" : "#e8e8e8",
+                        fontSize: "15px",
+                        lineHeight: "1.6",
+                        whiteSpace: "pre-wrap",
+                        borderRadius,
+                        border: isUser ? "none" : "1px solid #2e2e2e",
+                        boxShadow: isUser
+                          ? "0 2px 8px rgba(212,165,116,0.25)"
+                          : "0 1px 4px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      {msg.content}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {/* Typing indicator */}
               {isLoading && (
-                <div className="flex justify-start">
+                <div className="flex items-end gap-2 justify-start" style={{ marginTop: "12px" }}>
                   <div
-                    className="px-4 py-3 rounded-sm flex gap-1 items-center"
-                    style={{ background: "#2a2a2a" }}
+                    className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "#D4A574", marginBottom: "2px" }}
                   >
-                    <span
-                      className="typing-dot w-1.5 h-1.5 rounded-full"
-                      style={{ background: "#D4A574" }}
-                    />
-                    <span
-                      className="typing-dot w-1.5 h-1.5 rounded-full"
-                      style={{ background: "#D4A574" }}
-                    />
-                    <span
-                      className="typing-dot w-1.5 h-1.5 rounded-full"
-                      style={{ background: "#D4A574" }}
-                    />
+                    <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "8px", fontWeight: 700, color: "#1a1a1a" }}>SW</span>
+                  </div>
+                  <div
+                    className="px-4 py-3 flex gap-1 items-center"
+                    style={{
+                      background: "#1e1e1e",
+                      border: "1px solid #2e2e2e",
+                      borderRadius: "18px 18px 18px 4px",
+                      boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    <span className="typing-dot w-1.5 h-1.5 rounded-full" style={{ background: "#D4A574" }} />
+                    <span className="typing-dot w-1.5 h-1.5 rounded-full" style={{ background: "#D4A574" }} />
+                    <span className="typing-dot w-1.5 h-1.5 rounded-full" style={{ background: "#D4A574" }} />
                   </div>
                 </div>
               )}
-
+              </div>
             </div>
 
             {/* Input area */}
             {!isComplete && (
               <div
-                className="flex border-t"
-                style={{ background: "#222", borderColor: "#2a2a2a" }}
+                className="px-4 py-3 border-t"
+                style={{ background: "#111", borderColor: "#222" }}
               >
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder={
-                    initialized ? "Type your message..." : "One moment..."
-                  }
-                  disabled={isLoading || !initialized}
-                  className="flex-1 bg-transparent px-4 py-4 outline-none disabled:opacity-40"
-                  style={{
-                    fontFamily: "var(--font-dm-sans), sans-serif",
-                    color: "#f0f0f0",
-                    fontSize: "15px",
-                  }}
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={isLoading || !input.trim() || !initialized}
-                  className="px-6 py-4 font-medium text-sm transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{
-                    fontFamily: "var(--font-dm-sans), sans-serif",
-                    background: "#D4A574",
-                    color: "#1a1a1a",
-                    fontSize: "14px",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!(e.currentTarget as HTMLButtonElement).disabled)
-                      (e.currentTarget as HTMLButtonElement).style.background =
-                        "#c49060";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background =
-                      "#D4A574";
-                  }}
+                <div
+                  className="flex items-center gap-2 px-4 py-2 rounded-full"
+                  style={{ background: "#1e1e1e", border: "1px solid #333" }}
                 >
-                  Send
-                </button>
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder={initialized ? "Type your message..." : "One moment..."}
+                    disabled={isLoading || !initialized}
+                    className="flex-1 bg-transparent outline-none disabled:opacity-40"
+                    style={{
+                      fontFamily: "var(--font-dm-sans), sans-serif",
+                      color: "#f0f0f0",
+                      fontSize: "15px",
+                    }}
+                  />
+                  <button
+                    onClick={handleSend}
+                    disabled={isLoading || !input.trim() || !initialized}
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed"
+                    style={{ background: "#D4A574" }}
+                    onMouseEnter={(e) => {
+                      if (!(e.currentTarget as HTMLButtonElement).disabled)
+                        (e.currentTarget as HTMLButtonElement).style.background = "#c49060";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background = "#D4A574";
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             )}
 
@@ -866,8 +973,8 @@ function ChatbotSection() {
               <div
                 className="px-5 py-4 border-t text-center"
                 style={{
-                  background: "#222",
-                  borderColor: "#2a2a2a",
+                  background: "#111",
+                  borderColor: "#222",
                   fontFamily: "var(--font-dm-sans), sans-serif",
                   color: "#D4A574",
                   fontSize: "14px",
