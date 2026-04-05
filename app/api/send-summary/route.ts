@@ -169,7 +169,7 @@ ${formatTranscript(messages)}
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "Streamline Workshop <noreply@tandemleap.com>",
       to: "scott@tandemleap.com",
       subject: `New Streamline Workshop Inquiry — ${timestamp}`,
       html: htmlBody,
