@@ -180,6 +180,7 @@ function HeroSection() {
           </h1>
 
           <a
+            id="hero-cta"
             href="#chat"
             className="inline-block font-semibold"
             style={{
@@ -810,6 +811,51 @@ function Footer() {
   );
 }
 
+// ─── Sticky CTA ─────────────────────────────────────────────────────────────
+
+function StickyCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const heroBtn = document.getElementById("hero-cta");
+    if (!heroBtn) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    obs.observe(heroBtn);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <a
+      href="#chat"
+      className="fixed bottom-6 right-6 z-50 font-semibold"
+      style={{
+        fontFamily: "var(--font-dm-sans), sans-serif",
+        background: "#D4A574",
+        color: "#1a1a1a",
+        fontSize: "15px",
+        letterSpacing: "0.01em",
+        padding: "0.65em 1.4em",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        pointerEvents: visible ? "auto" : "none",
+        transition: "opacity 0.3s ease, transform 0.3s ease",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "#c49060";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "#D4A574";
+      }}
+    >
+      Let&apos;s fix it.
+    </a>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -820,6 +866,7 @@ export default function Home() {
       <WhatHappensNextSection />
       <ChatbotSection />
       <Footer />
+      <StickyCTA />
     </main>
   );
 }
