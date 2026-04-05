@@ -207,34 +207,40 @@ function WhoWeAreSection() {
               }}
             >
               <p>
-                Running a small business means wearing every hat. You&apos;re the
-                owner, the scheduler, the bookkeeper, and the closer — all before
-                lunch. Somewhere in there you&apos;ve heard that AI is changing
-                everything. Maybe it is. But you don&apos;t have time to figure out
-                what that means for your business.
-              </p>
-              <p
-                className="font-semibold"
-                style={{
-                  color: "#1a1a1a",
-                  fontFamily: "var(--font-dm-sans), sans-serif",
-                  fontStyle: "italic",
-                  fontSize: "clamp(18px, 2vw, 22px)",
-                }}
-              >
-                That&apos;s where we come in.
+                Running a small business means wearing every hat — owner, scheduler,
+                bookkeeper, closer — all before lunch. You&apos;ve heard that AI is
+                changing everything. Maybe it is. But if you don&apos;t have time to
+                figure out what that means for your business, that&apos;s where we
+                come in.
               </p>
               <p>
-                Streamline Workshop is Scott and Corazon — a foster dad and daughter
-                who find what&apos;s slowing small businesses down and fix it. We
-                build custom solutions that fit the way you actually work. No
-                subscriptions. No software that forces you to change. Just something
-                that fits.
+                Streamline Workshop is Scott and Corazon, a foster dad and daughter
+                from Washburn, Wisconsin. We listen to what&apos;s slowing your
+                business down — or just making you crazy — and build something that
+                fixes it. Custom, not off the shelf. Built around how you actually
+                work.
               </p>
               <p>
-                We&apos;re currently selecting a small number of businesses to work
-                with. Some will pay. Some will be on the house while we build our
-                portfolio. Either way you get something built for you.
+                What we&apos;re doing is genuinely new. Custom built solutions for
+                small businesses weren&apos;t really possible a year ago. The tools
+                have changed dramatically and we&apos;re learning by building real
+                things for real people — not running experiments in a vacuum. We
+                won&apos;t take on work we can&apos;t deliver. If your problem
+                isn&apos;t something we can solve, we&apos;ll tell you upfront and
+                won&apos;t waste your time.
+              </p>
+              <p>
+                We have zero overhead and no investors to answer to. That means we
+                can work with real small business budgets and still deliver genuine
+                value. We&apos;re also taking on a handful of clients for free while
+                we build our portfolio — so tell us your story.
+              </p>
+              <p>
+                Scott has always believed you learn by building — get in a little
+                over your head, figure it out, finish it. This business isn&apos;t
+                just helping Corazon become the first person in her family to go to
+                college, it&apos;s part of her education, helping her build skills
+                she&apos;ll need no matter what the future looks like.
               </p>
             </div>
           </div>
@@ -269,7 +275,7 @@ function WhoWeAreSection() {
                 fontSize: "13px",
               }}
             >
-              Scott and Corazon. A foster dad and daughter building something that matters.
+              Scott and Corazon. Washburn, Wisconsin.
             </p>
           </div>
         </div>
@@ -535,7 +541,7 @@ function ChatbotSection() {
               fontSize: "13px",
             }}
           >
-            Scott will review your conversation and reach out within 48 hours.
+            Tell us your story. Let&apos;s see if we can help.
           </p>
         </div>
       </div>
