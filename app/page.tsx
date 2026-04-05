@@ -194,50 +194,13 @@ function WhoWeAreSection() {
           We&apos;re not a software company.
         </h2>
 
-        {/* Team photo — floats right on md+, stacks above on mobile */}
         <div
-          className="md:float-right md:ml-10 mb-6 md:mb-2"
-          style={{ width: "clamp(220px, 36%, 360px)" }}
-        >
-          <div
-            className="relative overflow-hidden"
-            style={{ aspectRatio: "4/5" }}
-          >
-            <div
-              className="absolute inset-0 z-10 pointer-events-none"
-              style={{ background: "rgba(212,165,116,0.1)" }}
-            />
-            <Image
-              src="/team-photo.jpg"
-              alt="Scott and Corazon"
-              fill
-              className="object-cover object-top"
-              onError={(e) => {
-                const img = e.currentTarget as HTMLImageElement;
-                img.src =
-                  "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
-              }}
-            />
-          </div>
-          <p
-            className="mt-3 italic text-center"
-            style={{
-              fontFamily: "var(--font-dm-sans), sans-serif",
-              color: "#888",
-              fontSize: "13px",
-            }}
-          >
-            Scott and Corazon. Washburn, Wisconsin.
-          </p>
-        </div>
-
-        <div
-          className="space-y-6"
+          className="space-y-4"
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             color: "#2a2a2a",
-            fontSize: "17px",
-            lineHeight: "1.75",
+            fontSize: "16px",
+            lineHeight: "1.65",
           }}
         >
           <p>
@@ -247,6 +210,43 @@ function WhoWeAreSection() {
             figure out what that means for your business, that&apos;s where we
             come in.
           </p>
+
+          {/* Team photo — floats right on md+, stacks below first para on mobile */}
+          <div
+            className="md:float-right md:ml-10 mb-4 md:mb-2"
+            style={{ width: "clamp(220px, 36%, 360px)" }}
+          >
+            <div
+              className="relative overflow-hidden"
+              style={{ aspectRatio: "4/5" }}
+            >
+              <div
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{ background: "rgba(212,165,116,0.1)" }}
+              />
+              <Image
+                src="/team-photo.jpg"
+                alt="Scott and Corazon"
+                fill
+                className="object-cover object-top"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.src =
+                    "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
+                }}
+              />
+            </div>
+            <p
+              className="mt-3 italic text-center"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#888",
+                fontSize: "13px",
+              }}
+            >
+              Scott and Corazon. Washburn, Wisconsin.
+            </p>
+          </div>
           <p>
             Streamline Workshop is Scott and Corazon, a foster dad and daughter
             from Washburn, Wisconsin. We listen to what&apos;s slowing your
