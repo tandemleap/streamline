@@ -287,7 +287,7 @@ function WhoWeAreSection() {
             }}
           >
             <p>
-              Streamline Workshop is Scott and Corazon, a foster dad and daughter
+              Meet Scott and Corazon, a foster dad and daughter team.
               We listen to what&apos;s slowing your
               business down — or just making you crazy — and build something that
               fixes it. Custom, not off the shelf. Built around how you actually
