@@ -800,6 +800,43 @@ function Footer() {
   );
 }
 
+// ─── Sticky CTA ─────────────────────────────────────────────────────────────
+
+function StickyCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <a
+      href="#chat"
+      className="fixed bottom-6 right-6 z-50 px-5 py-3 font-semibold text-sm rounded-sm transition-all duration-300"
+      style={{
+        fontFamily: "var(--font-dm-sans), sans-serif",
+        background: "#D4A574",
+        color: "#1a1a1a",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        pointerEvents: visible ? "auto" : "none",
+        letterSpacing: "0.01em",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "#c49060";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "#D4A574";
+      }}
+    >
+      Let&apos;s fix it.
+    </a>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -810,6 +847,7 @@ export default function Home() {
       <WhatHappensNextSection />
       <ChatbotSection />
       <Footer />
+      <StickyCTA />
     </main>
   );
 }
