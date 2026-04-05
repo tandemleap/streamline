@@ -283,6 +283,50 @@ function WhoWeAreSection() {
   );
 }
 
+// ─── Rotating Phrase ────────────────────────────────────────────────────────
+
+const PHRASES = [
+  "...what's slowing you down.",
+  "...what's driving you crazy.",
+  "...where the friction is.",
+  "...what's not working.",
+  "...what you keep putting off fixing.",
+  "...what's eating your time.",
+  "...what makes you want to throw your laptop.",
+  "...where you're stuck.",
+  "...what should take minutes but takes hours.",
+  "...what's broken.",
+];
+
+function RotatingPhrase() {
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % PHRASES.length);
+        setVisible(true);
+      }, 400);
+    }, 2500);
+    return () => clearInterval(cycle);
+  }, []);
+
+  return (
+    <span
+      style={{
+        color: "#D4A574",
+        display: "inline-block",
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.4s ease",
+      }}
+    >
+      {PHRASES[index]}
+    </span>
+  );
+}
+
 // ─── Chatbot Section ────────────────────────────────────────────────────────
 
 function ChatbotSection() {
@@ -400,14 +444,13 @@ function ChatbotSection() {
             className="font-black leading-none"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              color: "#ffffff",
               fontSize: "clamp(36px, 5vw, 64px)",
               letterSpacing: "-0.03em",
             }}
           >
-            TELL US WHERE
+            <span style={{ color: "#ffffff" }}>Tell us...</span>
             <br />
-            IT HURTS.
+            <RotatingPhrase />
           </h2>
         </div>
 
