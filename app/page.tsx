@@ -445,9 +445,9 @@ function ChatbotSection() {
             className="font-black leading-none"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "clamp(36px, 5vw, 64px)",
+              fontSize: "clamp(30px, 4.25vw, 54px)",
               letterSpacing: "-0.03em",
-              minHeight: "calc(2.2 * clamp(36px, 5vw, 64px))",
+              minHeight: "calc(2.2 * clamp(30px, 4.25vw, 54px))",
               display: "flex",
               flexWrap: "wrap",
               alignContent: "flex-start",
