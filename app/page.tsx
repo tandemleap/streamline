@@ -338,13 +338,14 @@ function ChatbotSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [initialized, setInitialized] = useState(false);
-  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when messages change (not on initial empty state)
+  // Scroll within the chat container (not the page) when messages change
   useEffect(() => {
     if (messages.length === 0) return;
-    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = chatScrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isLoading]);
 
   const sendMessage = useCallback(async (userMessages: Message[]) => {
@@ -460,6 +461,7 @@ function ChatbotSection() {
           >
             {/* Message area */}
             <div
+              ref={chatScrollRef}
               className="chat-scroll overflow-y-auto p-5 space-y-4"
               style={{ minHeight: "320px", maxHeight: "480px" }}
             >
@@ -507,7 +509,6 @@ function ChatbotSection() {
                 </div>
               )}
 
-              <div ref={chatBottomRef} />
             </div>
 
             {/* Input area */}
