@@ -286,16 +286,16 @@ function WhoWeAreSection() {
 // ─── Rotating Phrase ────────────────────────────────────────────────────────
 
 const PHRASES = [
-  "...what's slowing you down.",
-  "...what's driving you crazy.",
-  "...where the friction is.",
-  "...what's not working.",
-  "...what you keep putting off fixing.",
-  "...what's eating your time.",
-  "...what makes you want to throw your laptop.",
-  "...where you're stuck.",
-  "...what should take minutes but takes hours.",
-  "...what's broken.",
+  "what's slowing you down.",
+  "what's driving you crazy.",
+  "where the friction is.",
+  "what's not working.",
+  "what you keep putting off fixing.",
+  "what's eating your time.",
+  "what makes you want to throw your laptop.",
+  "where you're stuck.",
+  "what should take minutes but takes hours.",
+  "what's broken.",
 ];
 
 function RotatingPhrase() {
@@ -309,7 +309,7 @@ function RotatingPhrase() {
         setIndex((i) => (i + 1) % PHRASES.length);
         setVisible(true);
       }, 400);
-    }, 2500);
+    }, 2800);
     return () => clearInterval(cycle);
   }, []);
 
@@ -448,9 +448,7 @@ function ChatbotSection() {
               letterSpacing: "-0.03em",
             }}
           >
-            <span style={{ color: "#ffffff" }}>Tell us...</span>
-            <br />
-            <RotatingPhrase />
+            <span style={{ color: "#ffffff" }}>Tell us </span><RotatingPhrase />
           </h2>
         </div>
 
