@@ -1,31 +1,33 @@
 @AGENTS.md
 
-# Streamline Workshop — Project Guide
+# Streamline Workshop — Project Context
 
 ## What This Is
-A single-page marketing and intake site for Streamline Workshop, a small custom-solutions business run by Scott and Corazon (a foster dad and daughter). The site introduces the business, explains what they do, and collects leads via an AI-powered chat intake that emails a summary to Scott.
+Streamline Workshop is a small business automation consultancy run by Scott Griffiths and his foster daughter Corazon. We find what's slowing small businesses down and fix it — custom solutions, no unnecessary software subscriptions, no forcing clients to change how they work.
+
+**Tagline:** "We find the friction. We fix it."
 
 ## Tech Stack
-- **Next.js 16** (App Router, TypeScript)
-- **Tailwind CSS v4** (via `@import "tailwindcss"` in globals.css — no tailwind.config.ts)
-- **Anthropic SDK** — powers the chat intake bot
-- **Resend** — sends conversation summary emails
-- **Deployment target:** Vercel
+- **Framework:** Next.js 16 App Router (TypeScript)
+- **Styling:** Tailwind CSS v4 (via `@import "tailwindcss"` in globals.css — no tailwind.config.ts)
+- **Fonts:** Playfair Display (headlines) + DM Sans (body) via Google Fonts `<link>` tags
+- **AI:** Anthropic Claude via `@anthropic-ai/sdk` — powers the intake chatbot
+- **Email:** Resend — sends conversation summaries to Scott
+- **Deployment:** Vercel
 
 ## Project Structure
 ```
 app/
-  layout.tsx          # Google Fonts via <link> tags, metadata
-  globals.css         # CSS custom properties, animations, scrollbar styles
-  page.tsx            # Entire single-page site (all sections in one file)
+  layout.tsx                  — Google Fonts via <link> tags, metadata
+  globals.css                 — CSS custom properties, animations, scrollbar styles
+  page.tsx                    — Entire single-page site (all sections in one file)
   api/
-    chat/route.ts     # POST — Anthropic chat, returns {text}
-    send-summary/route.ts  # POST — Resend email to scott@tandemleap.com
+    chat/route.ts             — POST — Anthropic chat, returns {text}
+    send-summary/route.ts     — POST — Resend email to scott@tandemleap.com
 public/
-  logo.png            # Logo shown in nav and footer
-  team-photo.jpg      # Scott and Corazon — shown in "Who We Are" section
-  slowdown.png        # Hero section image alongside the main headline
-.env.local.example    # Lists required env vars (never commit .env.local)
+  logo.png                    — Logo shown in nav and footer
+  team-photo.jpg              — Scott and Corazon — shown in "Who We Are" section
+  slowdown.png                — Hero section image alongside the main headline
 ```
 
 ## Environment Variables
@@ -45,7 +47,7 @@ Set these in `.env.local` for local dev. Set them in Vercel dashboard for produc
 - Body text (on light): `#2a2a2a`
 - Muted text: `#888` / `#555`
 
-**Fonts (loaded via Google Fonts `<link>` at runtime):**
+**Fonts:**
 - Headlines: `'Playfair Display'` — use `fontFamily: "var(--font-playfair), serif"`
 - Body/UI: `'DM Sans'` — use `fontFamily: "var(--font-dm-sans), sans-serif"`
 - Eyebrow labels: DM Sans, 11px, `tracking-[0.15em]`, uppercase
@@ -74,6 +76,13 @@ Set these in `.env.local` for local dev. Set them in Vercel dashboard for produc
 - **Images** use Next.js `<Image>` with `fill` + `object-cover` for editorial crops
 - Resend client initialized **inside** the POST handler (not at module level) to avoid build-time errors
 
+## Brand & Tone
+Plain language. Warm, direct, human — not corporate. Scott and Corazon are real people building real things for real business owners. Copy should feel like it came from someone who actually gives a damn, not a marketing agency.
+
+## Known Pre-Launch Items
+- Change Resend `from` address from `onboarding@resend.dev` to a verified domain sender
+- Add rate limiting or message cap on `/api/chat` to guard API costs
+
 ## Running Locally
 ```bash
 npm install
@@ -81,7 +90,10 @@ npm run dev       # http://localhost:3000
 npm run build     # verify production build
 ```
 
-## Email
-- FROM: `onboarding@resend.dev` (temporary — swap for verified domain when ready)
-- TO: `scott@tandemleap.com`
-- Parses name, business type, and pain points from conversation before sending
+---
+
+## Session Notes
+*Claude Code should update this section at the end of each working session with a brief summary of what changed.*
+
+<!-- SESSION LOG -->
+<!-- Add entries above this line in format: YYYY-MM-DD — summary of changes -->
