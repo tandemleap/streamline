@@ -90,6 +90,7 @@ function HeroRotatingPhrase({ visible }: { visible: boolean }) {
     <span
       style={{
         color: "#D4A574",
+        fontSize: "0.72em",
         opacity: visible && phraseVisible ? 1 : 0,
         transition: phraseVisible ? "opacity 0.6s ease" : "opacity 0.6s ease",
       }}
@@ -170,7 +171,7 @@ function HeroSection() {
             <span
               className="block"
               style={{
-                minHeight: "2.1em",
+                minHeight: "calc(2 * 0.72em * 1.1)",
                 opacity: wordsVisible ? 1 : 0,
                 transition: "opacity 0.5s ease 0.3s",
               }}
