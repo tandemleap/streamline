@@ -179,6 +179,30 @@ function HeroSection() {
             </span>
           </h1>
 
+          <a
+            href="#chat"
+            className="inline-block font-semibold"
+            style={{
+              fontFamily: "var(--font-dm-sans), sans-serif",
+              background: "#D4A574",
+              color: "#1a1a1a",
+              fontSize: "clamp(15px, 1.5vw, 18px)",
+              letterSpacing: "0.01em",
+              padding: "0.6em 1.6em",
+              opacity: wordsVisible ? 1 : 0,
+              transform: wordsVisible ? "translateY(0)" : "translateY(12px)",
+              transition: "opacity 0.6s ease 0.65s, transform 0.6s ease 0.65s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = "#c49060";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = "#D4A574";
+            }}
+          >
+            Let&apos;s fix it.
+          </a>
+
         </div>
       </div>
 
@@ -786,46 +810,6 @@ function Footer() {
   );
 }
 
-// ─── Sticky CTA ─────────────────────────────────────────────────────────────
-
-function StickyCTA() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <a
-      href="#chat"
-      className="fixed bottom-6 right-6 z-50 font-semibold"
-      style={{
-        fontFamily: "var(--font-dm-sans), sans-serif",
-        background: "#D4A574",
-        color: "#1a1a1a",
-        fontSize: "15px",
-        letterSpacing: "0.01em",
-        padding: "0.65em 1.4em",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(12px)",
-        pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.3s ease, transform 0.3s ease",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "#c49060";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "#D4A574";
-      }}
-    >
-      Let&apos;s fix it.
-    </a>
-  );
-}
-
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -836,7 +820,6 @@ export default function Home() {
       <WhatHappensNextSection />
       <ChatbotSection />
       <Footer />
-      <StickyCTA />
     </main>
   );
 }
