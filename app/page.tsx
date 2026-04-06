@@ -259,10 +259,12 @@ function WhoWeAreSection() {
           You already know what&apos;s slowing you down.
         </h2>
 
-        {/* Grid: text left, image right — bottoms align via items-stretch */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_36%] gap-10 items-start">
+        {/* Grid: text left, image right — image drives row height */}
+        <div className="grid grid-cols-1 md:grid-cols-[42%_58%] gap-10 items-stretch">
+
+          {/* Text — fills the same height as the image */}
           <div
-            className="space-y-4"
+            className="flex flex-col justify-between"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
               color: "#2a2a2a",
@@ -289,14 +291,14 @@ function WhoWeAreSection() {
             </p>
           </div>
 
-          {/* Image — natural aspect ratio */}
+          {/* Image — natural 3:2 aspect ratio drives the row height */}
           <div>
             <Image
               src="/what-we-do.png"
               alt="The contrast between a cluttered small business office and a clean modern workspace"
               width={1536}
               height={1024}
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: "100%", height: "auto", display: "block" }}
               className="rounded-sm"
             />
           </div>
