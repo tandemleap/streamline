@@ -711,9 +711,48 @@ function WhoWeAreContent() {
 
 // ─── What We Can Build Content ───────────────────────────────────────────────
 
+const EXAMPLES = [
+  {
+    category: "Service Business",
+    headline: "The Never-Ending Reminder Loop",
+    problem: "Owner manually texts appointment reminders, follows up on unpaid invoices, and chases no-shows — every single week, by hand.",
+    fix: "Automated system sends reminders on schedule, tracks responses, and flags overdue accounts. Set it up once, stop thinking about it.",
+  },
+  {
+    category: "Retail / Wellness / Fitness",
+    headline: "The Software That Almost Fits",
+    problem: "Paying $150/month for a bloated platform that does 90% more than needed — and still doesn't quite work the way the business does.",
+    fix: "A lightweight custom tool built around the actual workflow. No subscription. No features nobody uses. Just what you need.",
+  },
+  {
+    category: "Professional Services",
+    headline: "The Document Chase",
+    problem: "Clients send the wrong documents, in the wrong format, at the wrong time. Hours wasted every week chasing people by email.",
+    fix: "Client intake portal with guided uploads, status tracking, and automatic acknowledgments. Staff stops chasing. Clients know what to send.",
+  },
+  {
+    category: "Non-Profit / Community Org",
+    headline: "The Paper Sign-In Sheet",
+    problem: "Client visits tracked on paper or a spreadsheet. Every grant report means manually counting rows and hoping nothing got lost.",
+    fix: "Simple digital check-in captures name, date, and service provided. Auto-generates monthly summaries ready for funders — no counting required.",
+  },
+  {
+    category: "Non-Profit / Program Org",
+    headline: "The Registration Email Avalanche",
+    problem: "Families register via email or PDF. Staff manually enters data, sends confirmations, tracks capacity — and still misses things.",
+    fix: "Online registration feeds a database, sends confirmations automatically, notifies staff, and shows real-time capacity. No more inbox triage.",
+  },
+  {
+    category: "Any Business or Org",
+    headline: "The FAQ Inbox",
+    problem: "Staff answering the same 10 questions over and over — by email, phone, or Facebook message. Every single day.",
+    fix: "AI assistant on the website handles common questions, qualifies real inquiries, and only escalates what actually needs a human.",
+  },
+];
+
 function WhatWeCanBuildContent() {
   return (
-    <div className="p-8 md:p-10">
+    <div className="p-6 md:p-8">
       <p
         className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-4"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#888" }}
@@ -721,23 +760,134 @@ function WhatWeCanBuildContent() {
         WHAT WE CAN BUILD
       </p>
       <h2
-        className="font-bold mb-4 leading-tight"
+        className="font-bold mb-2 leading-tight"
         style={{
           fontFamily: "var(--font-dm-sans), sans-serif",
           color: "#1a1a1a",
-          fontSize: "clamp(26px, 3.5vw, 40px)",
+          fontSize: "clamp(24px, 3vw, 36px)",
           letterSpacing: "-0.02em",
         }}
       >
-        Examples are on their way.
+        Problems we&apos;re good at solving.
       </h2>
       <p
-        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#555", fontSize: "16px", lineHeight: "1.65" }}
+        className="mb-6"
+        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#666", fontSize: "14px", lineHeight: "1.6" }}
       >
-        We&apos;re building out real examples of the kinds of problems we solve.
-        Check back soon — or just tell us what&apos;s slowing you down and
-        we&apos;ll tell you straight whether it&apos;s something we can fix.
+        <span className="hidden md:inline">Hover a card to see the full picture. </span>These are the kinds of problems we hear most — and fix best.
       </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {EXAMPLES.map((ex) => (
+          <div
+            key={ex.headline}
+            className="example-card rounded-xl p-5 flex flex-col"
+            style={{ background: "#111" }}
+          >
+            {/* Amber top accent */}
+            <div
+              style={{
+                height: "2px",
+                background: "linear-gradient(90deg, #D4A574, transparent)",
+                marginBottom: "14px",
+                borderRadius: "1px",
+              }}
+            />
+
+            {/* Category tag */}
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#D4A574",
+                fontSize: "10px",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "8px",
+              }}
+            >
+              {ex.category}
+            </p>
+
+            {/* Headline */}
+            <h3
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#ffffff",
+                fontSize: "17px",
+                fontWeight: 700,
+                lineHeight: "1.3",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {ex.headline}
+            </h3>
+
+            {/* Hover hint — desktop only, fades out on hover */}
+            <p
+              className="card-hint mt-3"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#444",
+                fontSize: "12px",
+              }}
+            >
+              — more —
+            </p>
+
+            {/* Reveal content */}
+            <div className="card-reveal">
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#D4A574",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  marginBottom: "5px",
+                }}
+              >
+                The Problem
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#999",
+                  fontSize: "14px",
+                  lineHeight: "1.6",
+                  marginBottom: "14px",
+                }}
+              >
+                {ex.problem}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#D4A574",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  marginBottom: "5px",
+                }}
+              >
+                The Fix
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  color: "#d0d0d0",
+                  fontSize: "14px",
+                  lineHeight: "1.6",
+                }}
+              >
+                {ex.fix}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

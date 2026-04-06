@@ -96,6 +96,55 @@ body {
 .typing-dot:nth-child(2) { animation: dotBounce 1.2s ease-in-out infinite 0.2s; }
 .typing-dot:nth-child(3) { animation: dotBounce 1.2s ease-in-out infinite 0.4s; }
 
+/* Example cards — hover reveal */
+.example-card {
+  border: 1px solid #222;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.example-card .card-reveal {
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.35s ease 0.05s, margin-top 0.35s ease;
+  max-height: none;
+  opacity: 1;
+  margin-top: 14px;
+}
+
+.example-card .card-hint {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .example-card .card-reveal {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+  }
+
+  .example-card .card-hint {
+    display: block;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+  }
+
+  .example-card:hover .card-reveal {
+    max-height: 360px;
+    opacity: 1;
+    margin-top: 14px;
+  }
+
+  .example-card:hover .card-hint {
+    opacity: 0;
+  }
+
+  .example-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+    border-color: #5a3a20;
+  }
+}
+
 /* Online pulse dot */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
