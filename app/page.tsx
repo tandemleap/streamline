@@ -1063,24 +1063,6 @@ function Footer() {
         >
           Small business problems. Custom solutions. Straight answers.
         </p>
-        <a
-          href="mailto:hello@streamlineworkshop.com"
-          className="block mb-8 transition-colors duration-200"
-          style={{
-            fontFamily: "var(--font-dm-sans), sans-serif",
-            color: "#999",
-            fontSize: "14px",
-            textDecoration: "none",
-          }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLAnchorElement).style.color = "#D4A574")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLAnchorElement).style.color = "#999")
-          }
-        >
-          hello@streamlineworkshop.com
-        </a>
         <p
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
