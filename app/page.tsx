@@ -1061,7 +1061,7 @@ function Footer() {
             fontSize: "18px",
           }}
         >
-          We find the friction. We fix it.
+          Small business problems. Custom solutions. Straight answers.
         </p>
         <a
           href="mailto:hello@streamlineworkshop.com"
