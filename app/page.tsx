@@ -151,9 +151,8 @@ function HeroSection() {
             className="font-black mb-6"
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "clamp(41px, 5.95vw, 88px)",
               letterSpacing: "-0.03em",
-              lineHeight: "1.1",
+              lineHeight: "1.15",
             }}
           >
             <span className="block overflow-hidden" style={{ paddingBottom: "0.12em" }}>
@@ -161,18 +160,19 @@ function HeroSection() {
                 className="hero-word block"
                 style={{
                   color: "#ffffff",
+                  fontSize: "clamp(18px, 2.5vw, 36px)",
                   animationDelay: wordsVisible ? "0s" : "9999s",
                   animationPlayState: wordsVisible ? "running" : "paused",
                 }}
               >
-                Something is
+                In every small business, something is
               </span>
             </span>
             <span
               className="block"
               style={{
                 minHeight: "clamp(26px, 3.8vw, 62px)",
-                marginTop: "-0.15em",
+                marginTop: "0.1em",
                 opacity: wordsVisible ? 1 : 0,
                 transition: "opacity 0.5s ease 0.3s",
               }}
