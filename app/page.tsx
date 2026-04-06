@@ -340,11 +340,11 @@ function WhoWeAreSection() {
               style={{
                 fontFamily: "var(--font-dm-sans), sans-serif",
                 color: "#888",
-                fontSize: "12px",
+                fontSize: "18px",
                 lineHeight: "1.5",
               }}
             >
-              If your office looks like the right side of this photo, we should talk.
+              If your office looks like this one, we should talk.
             </p>
           </div>
         </div>
