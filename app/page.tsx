@@ -259,21 +259,6 @@ function WhoWeAreSection() {
           You already know what&apos;s slowing you down.
         </h2>
 
-        {/* First paragraph — full width above the grid */}
-        <p
-          className="mb-6"
-          style={{
-            fontFamily: "var(--font-dm-sans), sans-serif",
-            color: "#2a2a2a",
-            fontSize: "16px",
-            lineHeight: "1.65",
-          }}
-        >
-          You&apos;re probably handling it the same way you always have — a
-          spreadsheet, a notebook, a system that lives mostly in your head. It
-          works, mostly. But it&apos;s eating your time and you know it.
-        </p>
-
         {/* Grid: text left, image right — bottoms align via items-stretch */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_36%] gap-10 items-stretch">
           <div
@@ -285,6 +270,11 @@ function WhoWeAreSection() {
               lineHeight: "1.65",
             }}
           >
+            <p>
+              You&apos;re probably handling it the same way you always have — a
+              spreadsheet, a notebook, a system that lives mostly in your head. It
+              works, mostly. But it&apos;s eating your time and you know it.
+            </p>
             <p>
               Here&apos;s something worth knowing: for the first time in history,
               a genuine mom and pop shop can afford a custom built solution. Not
