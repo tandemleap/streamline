@@ -260,7 +260,7 @@ function WhoWeAreSection() {
         </h2>
 
         {/* Grid: text left, image right — bottoms align via items-stretch */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_36%] gap-10 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_36%] gap-10 items-start">
           <div
             className="space-y-4"
             style={{
@@ -289,13 +289,15 @@ function WhoWeAreSection() {
             </p>
           </div>
 
-          {/* Image fills the full height of the text column */}
-          <div className="relative overflow-hidden min-h-[280px]">
+          {/* Image — natural aspect ratio */}
+          <div>
             <Image
               src="/what-we-do.png"
               alt="The contrast between a cluttered small business office and a clean modern workspace"
-              fill
-              className="object-cover object-center"
+              width={1536}
+              height={1024}
+              style={{ width: "100%", height: "auto" }}
+              className="rounded-sm"
             />
           </div>
         </div>
