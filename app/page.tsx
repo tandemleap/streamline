@@ -286,7 +286,7 @@ function WhoWeAreSection() {
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             color: "#1a1a1a",
-            fontSize: "clamp(32px, 4vw, 52px)",
+            fontSize: "clamp(22px, 2.8vw, 32px)",
             letterSpacing: "-0.02em",
           }}
         >
