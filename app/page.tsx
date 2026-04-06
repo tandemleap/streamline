@@ -58,6 +58,40 @@ function Eyebrow({
 
 // ─── Hero Rotating Phrase ───────────────────────────────────────────────────
 
+const ENTITY_PHRASES = ["business", "non-profit", "organization"];
+
+function HeroEntityPhrase({ visible }: { visible: boolean }) {
+  const [index, setIndex] = useState(0);
+  const [entityVisible, setEntityVisible] = useState(true);
+
+  useEffect(() => {
+    if (!visible) return;
+    // Offset by 1.4s so entity and phrase rotations stay out of sync
+    const delay = setTimeout(() => {
+      const cycle = setInterval(() => {
+        setEntityVisible(false);
+        setTimeout(() => {
+          setIndex((i) => (i + 1) % ENTITY_PHRASES.length);
+          setEntityVisible(true);
+        }, 600);
+      }, 6800); // Not a multiple of 2.8s — naturally drifts apart
+      return () => clearInterval(cycle);
+    }, 1400);
+    return () => clearTimeout(delay);
+  }, [visible]);
+
+  return (
+    <span
+      style={{
+        opacity: visible && entityVisible ? 1 : 0,
+        transition: "opacity 0.6s ease",
+      }}
+    >
+      {ENTITY_PHRASES[index]}
+    </span>
+  );
+}
+
 const HERO_PHRASES = [
   "slowing you down.",
   "still being done by hand.",
@@ -166,7 +200,7 @@ function HeroSection() {
                   animationPlayState: wordsVisible ? "running" : "paused",
                 }}
               >
-                In every small business, something is
+                In every small <HeroEntityPhrase visible={wordsVisible} />, something is
               </span>
             </span>
             <span
