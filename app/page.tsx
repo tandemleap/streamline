@@ -582,6 +582,166 @@ function IntakeForm() {
   );
 }
 
+// ─── Modal ──────────────────────────────────────────────────────────────────
+
+function Modal({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
+  useEffect(() => {
+    if (open) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+      style={{ background: "rgba(0,0,0,0.8)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-xl"
+        style={{ background: "#f5f1ed" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full z-10 transition-colors duration-150"
+          style={{ background: "#e0dbd5", color: "#555", fontSize: "20px", lineHeight: 1 }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#d0cac4"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#e0dbd5"; }}
+          aria-label="Close"
+        >
+          ×
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─── Who We Are Content ──────────────────────────────────────────────────────
+
+function WhoWeAreContent() {
+  return (
+    <div className="p-8 md:p-10">
+      <p
+        className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-4"
+        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#888" }}
+      >
+        WHO WE ARE
+      </p>
+      <h2
+        className="font-bold mb-6 leading-tight"
+        style={{
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          color: "#1a1a1a",
+          fontSize: "clamp(26px, 3.5vw, 40px)",
+          letterSpacing: "-0.02em",
+        }}
+      >
+        We&apos;re not a software company.
+      </h2>
+
+      {/* Team photo */}
+      <div className="relative w-full mb-6 overflow-hidden rounded-lg">
+        <Image
+          src="/team-photo.jpg"
+          alt="Scott and Corazon"
+          width={800}
+          height={600}
+          style={{ width: "100%", height: "auto", display: "block" }}
+          className="object-cover object-top"
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 pb-3 px-3 pt-8"
+          style={{ background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.55))" }}
+        >
+          <p
+            className="italic text-center"
+            style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#ddd", fontSize: "12px" }}
+          >
+            Scott and Corazon. Washburn, Wisconsin.
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="space-y-4"
+        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#2a2a2a", fontSize: "16px", lineHeight: "1.65" }}
+      >
+        <p>
+          Running a small business means wearing every hat — owner, scheduler,
+          bookkeeper, closer — all before lunch. You&apos;ve heard that AI is
+          changing everything. Maybe it is. But if you don&apos;t have time to
+          figure out what that means for your business, that&apos;s where we come in.
+        </p>
+        <p>
+          Streamline Workshop is Scott and Corazon, a foster dad and daughter
+          from Washburn, Wisconsin. We listen to what&apos;s slowing your business
+          down — or just making you crazy — and build something that fixes it.
+          Custom, not off the shelf. Built around how you actually work.
+        </p>
+        <p>
+          What we&apos;re doing is genuinely new. Custom built solutions for small
+          businesses weren&apos;t really possible a year ago. The tools have changed
+          dramatically and we&apos;re learning by building real things for real
+          people — not running experiments in a vacuum. We won&apos;t take on work
+          we can&apos;t deliver. If your problem isn&apos;t something we can solve,
+          we&apos;ll tell you upfront and won&apos;t waste your time.
+        </p>
+        <p>
+          We have zero overhead and no investors to answer to. That means we can
+          work with real small business budgets and still deliver genuine value.
+          We&apos;re also taking on a handful of clients for free while we build
+          our portfolio — so tell us your story.
+        </p>
+        <p>
+          Scott has always believed you learn by building — get in a little over
+          your head, figure it out, finish it. This business isn&apos;t just
+          helping Corazon become the first person in her family to go to college,
+          it&apos;s part of her education, helping her build skills she&apos;ll
+          need no matter what the future looks like.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── What We Can Build Content ───────────────────────────────────────────────
+
+function WhatWeCanBuildContent() {
+  return (
+    <div className="p-8 md:p-10">
+      <p
+        className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-4"
+        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#888" }}
+      >
+        WHAT WE CAN BUILD
+      </p>
+      <h2
+        className="font-bold mb-4 leading-tight"
+        style={{
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          color: "#1a1a1a",
+          fontSize: "clamp(26px, 3.5vw, 40px)",
+          letterSpacing: "-0.02em",
+        }}
+      >
+        Examples are on their way.
+      </h2>
+      <p
+        style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#555", fontSize: "16px", lineHeight: "1.65" }}
+      >
+        We&apos;re building out real examples of the kinds of problems we solve.
+        Check back soon — or just tell us what&apos;s slowing you down and
+        we&apos;ll tell you straight whether it&apos;s something we can fix.
+      </p>
+    </div>
+  );
+}
+
 // ─── Chatbot Section ────────────────────────────────────────────────────────
 
 function ChatbotSection() {
@@ -594,6 +754,8 @@ function ChatbotSection() {
   const [isComplete, setIsComplete] = useState(false);
   const [initialized, setInitialized] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showWhoWeAre, setShowWhoWeAre] = useState(false);
+  const [showWhatWeCanBuild, setShowWhatWeCanBuild] = useState(false);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -685,7 +847,80 @@ function ChatbotSection() {
       className="pt-12 md:pt-16 pb-24 md:pb-36 px-8 md:px-16"
       style={{ background: "#4A3929" }}
     >
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Mobile-only: question buttons above headline */}
+        <div className="flex gap-3 mb-8 md:hidden">
+          {[
+            { label: "Who We Are", onClick: () => setShowWhoWeAre(true) },
+            { label: "What We Can Build", onClick: () => setShowWhatWeCanBuild(true) },
+          ].map((btn) => (
+            <button
+              key={btn.label}
+              onClick={btn.onClick}
+              className="flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors duration-150"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                background: "transparent",
+                color: "#c9a87c",
+                border: "1px solid #6b4e35",
+                fontSize: "13px",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#c9a87c"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#6b4e35"; }}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Desktop: sidebar + chat grid */}
+        <div className="md:grid md:grid-cols-[200px_1fr] md:gap-12 md:items-start">
+
+          {/* Sidebar — desktop only */}
+          <div className="hidden md:flex md:flex-col md:pt-2">
+            <p
+              className="mb-5 leading-snug"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#c9a87c",
+                fontSize: "13px",
+                lineHeight: "1.5",
+              }}
+            >
+              Questions before you dive in?
+            </p>
+            {[
+              { label: "Who We Are", onClick: () => setShowWhoWeAre(true) },
+              { label: "What We Can Build", onClick: () => setShowWhatWeCanBuild(true) },
+            ].map((btn) => (
+              <button
+                key={btn.label}
+                onClick={btn.onClick}
+                className="mb-3 py-2.5 px-4 rounded-lg text-left font-medium transition-colors duration-150"
+                style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  background: "transparent",
+                  color: "#e8d5be",
+                  border: "1px solid #6b4e35",
+                  fontSize: "14px",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#c9a87c";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#D4A574";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#6b4e35";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#e8d5be";
+                }}
+              >
+                {btn.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Chat column */}
+          <div>
         {/* Headline */}
         <div ref={headlineRef} className="fade-up mb-12">
           <Eyebrow light>GET STARTED</Eyebrow>
@@ -945,7 +1180,18 @@ function ChatbotSection() {
             Tell us your story. Let&apos;s see if we can help.
           </p>
         </div>
+          </div> {/* end chat column */}
+        </div> {/* end desktop grid */}
       </div>
+
+      {/* Modals */}
+      <Modal open={showWhoWeAre} onClose={() => setShowWhoWeAre(false)}>
+        <WhoWeAreContent />
+      </Modal>
+      <Modal open={showWhatWeCanBuild} onClose={() => setShowWhatWeCanBuild(false)}>
+        <WhatWeCanBuildContent />
+      </Modal>
+
     </section>
   );
 }
