@@ -335,6 +335,17 @@ function WhoWeAreSection() {
               style={{ width: "100%", height: "auto", display: "block" }}
               className="rounded-sm"
             />
+            <p
+              className="mt-2 italic"
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#888",
+                fontSize: "12px",
+                lineHeight: "1.5",
+              }}
+            >
+              If your office looks like the right side of this photo, we should talk.
+            </p>
           </div>
         </div>
       </div>
