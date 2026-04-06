@@ -160,7 +160,7 @@ function HeroSection() {
                 className="hero-word block"
                 style={{
                   color: "#ffffff",
-                  fontSize: "clamp(18px, 2.5vw, 36px)",
+                  fontSize: "clamp(22px, 3vw, 43px)",
                   animationDelay: wordsVisible ? "0s" : "9999s",
                   animationPlayState: wordsVisible ? "running" : "paused",
                 }}
