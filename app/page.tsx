@@ -956,18 +956,18 @@ function WhatHappensNextSection() {
   const steps = [
     {
       number: "01",
-      headline: "You talk.",
-      body: "Tell us what's slowing you down in a short conversation.",
+      headline: "Have a real conversation.",
+      body: "The AI assistant below will ask you a few questions about your business and what's making you crazy. Not a form. An actual back-and-forth that takes about five minutes.",
     },
     {
       number: "02",
-      headline: "We assess.",
-      body: "We'll figure out quickly whether this is something we can fix.",
+      headline: "Scott reads everything.",
+      body: "When the conversation wraps up, Scott personally reviews the full transcript. Within 48 hours he'll reach out directly — no middleman, no sales pitch.",
     },
     {
       number: "03",
-      headline: "We build.",
-      body: "You get something custom that actually fits your business.",
+      headline: "You get a straight answer.",
+      body: "Scott will tell you honestly whether this is something we can build, roughly what it might look like, and what it would cost. If it's not in our wheelhouse, he'll tell you that too.",
     },
   ];
 
@@ -988,7 +988,7 @@ function WhatHappensNextSection() {
             letterSpacing: "-0.02em",
           }}
         >
-          Simple as it gets.
+          Here&apos;s exactly how it works.
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
