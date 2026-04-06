@@ -59,7 +59,7 @@ function Eyebrow({
 // ─── Hero Rotating Phrase ───────────────────────────────────────────────────
 
 const HERO_PHRASES = [
-  "slowing your business down.",
+  "slowing you down.",
   "still being done by hand.",
   "getting in the way of growth.",
   "getting in the way of what you're good at.",
