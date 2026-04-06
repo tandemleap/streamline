@@ -1491,7 +1491,7 @@ function Footer() {
             fontSize: "18px",
           }}
         >
-          Small business problems. Custom solutions. Straight answers.
+          Custom solutions for the people doing the real work.
         </p>
         <p
           style={{
