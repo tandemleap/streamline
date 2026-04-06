@@ -245,7 +245,7 @@ function WhoWeAreSection() {
       style={{ background: "#f5f1ed" }}
     >
       <div ref={ref} className="fade-up max-w-4xl mx-auto">
-        <Eyebrow>WHO WE ARE</Eyebrow>
+        <Eyebrow>WHAT WE DO</Eyebrow>
 
         <h2
           className="font-bold mb-5 leading-tight"
@@ -256,7 +256,7 @@ function WhoWeAreSection() {
             letterSpacing: "-0.02em",
           }}
         >
-          We&apos;re not a software company.
+          You already know what&apos;s slowing you down.
         </h2>
 
         {/* First paragraph — full width above the grid */}
@@ -269,11 +269,9 @@ function WhoWeAreSection() {
             lineHeight: "1.65",
           }}
         >
-          Running a small business means wearing every hat — owner, scheduler,
-          bookkeeper, closer — all before lunch. You&apos;ve heard that AI is
-          changing everything. Maybe it is. But if you don&apos;t have time to
-          figure out what that means for your business, that&apos;s where we
-          come in.
+          You&apos;re probably handling it the same way you always have — a
+          spreadsheet, a notebook, a system that lives mostly in your head. It
+          works, mostly. But it&apos;s eating your time and you know it.
         </p>
 
         {/* Grid: text left, image right — bottoms align via items-stretch */}
@@ -288,71 +286,26 @@ function WhoWeAreSection() {
             }}
           >
             <p>
-              Meet Scott and Corazon, a foster dad and daughter team.
-              We listen to what&apos;s slowing your
-              business down — or just making you crazy — and build something that
-              fixes it. Custom, not off the shelf. Built around how you actually
-              work.
+              Here&apos;s something worth knowing: for the first time in history,
+              a genuine mom and pop shop can afford a custom built solution. Not
+              a software subscription that almost fits. Something built
+              specifically around the way your business actually works.
             </p>
             <p>
-              What we&apos;re doing is genuinely new. Custom built solutions for
-              small businesses weren&apos;t really possible a year ago. The tools
-              have changed dramatically and we&apos;re learning by building real
-              things for real people — not running experiments in a vacuum. We
-              won&apos;t take on work we can&apos;t deliver. If your problem
-              isn&apos;t something we can solve, we&apos;ll tell you upfront and
-              won&apos;t waste your time.
-            </p>
-            <p>
-              We have zero overhead and no investors to answer to. That means we
-              can work with real small business budgets and still deliver genuine
-              value. We&apos;re also taking on a handful of clients for free while
-              we build our portfolio — so tell us your story.
-            </p>
-            <p>
-              Scott has always believed you learn by building — get in a little
-              over your head, figure it out, finish it. This business isn&apos;t
-              just helping Corazon become the first person in her family to go to
-              college, it&apos;s part of her education, helping her build skills
-              she&apos;ll need no matter what the future looks like.
+              That&apos;s what we do. You tell us what&apos;s making you crazy.
+              We listen, figure out if we can help, and build something that fixes
+              it. And if your problem isn&apos;t something we can solve,
+              we&apos;ll tell you that straight and won&apos;t waste your time.
             </p>
           </div>
 
           {/* Image fills the full height of the text column */}
           <div className="relative overflow-hidden min-h-[280px]">
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: "rgba(212,165,116,0.1)", zIndex: 1 }}
-            />
-            {/* Caption overlay */}
-            <div
-              className="absolute bottom-0 left-0 right-0 pb-3 px-3 pt-8"
-              style={{
-                background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.55))",
-                zIndex: 2,
-              }}
-            >
-              <p
-                className="italic text-center"
-                style={{
-                  fontFamily: "var(--font-dm-sans), sans-serif",
-                  color: "#ddd",
-                  fontSize: "12px",
-                }}
-              >
-                Scott and Corazon. Washburn, Wisconsin.
-              </p>
-            </div>
             <Image
-              src="/team-photo.jpg"
-              alt="Scott and Corazon"
+              src="/what-we-do.png"
+              alt="The contrast between a cluttered small business office and a clean modern workspace"
               fill
-              className="object-cover object-top"
-              onError={(e) => {
-                const img = e.currentTarget as HTMLImageElement;
-                img.src =
-                  "https://placehold.co/520x640/1a1a1a/D4A574?text=Scott+%26+Corazon";
-              }}
+              className="object-cover object-center"
             />
           </div>
         </div>
