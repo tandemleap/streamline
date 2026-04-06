@@ -312,8 +312,8 @@ function WhoWeAreSection() {
               works, mostly. But it&apos;s eating your time and you know it.
             </p>
             <p>
-              Here&apos;s something worth knowing: for the first time in history,
-              a genuine mom and pop shop can afford a custom built solution. Not
+              Here&apos;s something worth knowing: <strong>for the first time in history,
+              a genuine mom and pop shop can afford a custom built solution.</strong> Not
               a software subscription that almost fits. Something built
               specifically around the way your business actually works.
             </p>
