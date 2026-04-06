@@ -62,7 +62,7 @@ const HERO_PHRASES = [
   "slowing you down.",
   "still being done by hand.",
   "getting in the way of growth.",
-  "getting in the way of what you're good at.",
+  "taking time away from doing what you're good at.",
   "making you feel like you're always behind.",
   "eating your time.",
   "driving you crazy.",
